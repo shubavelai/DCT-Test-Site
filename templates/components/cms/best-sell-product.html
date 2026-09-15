@@ -1,0 +1,38 @@
+{{#if theme_settings.best-seller-products}}
+<div class="sell-best-product section-spacing sectionLoad">
+    <div class="container">
+        <div class="row pre-row">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12 pre-col">
+                <div class="today-best-product sell-product-list">
+                    {{> components/products/best-product products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12 pre-col">
+                <div class="trending-product sell-product-list">
+                    {{> components/products/trending-product products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12 pre-col">
+                <div class="best-seller-product sell-product-list">
+                    {{> components/products/best-seller-product products=products.new columns=theme_settings.homepage_new_products_column_count}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if theme_settings.theme_automotive}}
+<script>
+$(document).ready(function(){
+
+    var highestBox = 0;
+        $('.productListItems .product').each(function(){  
+                if($(this).height() > highestBox){  
+                highestBox = $(this).height();  
+        }
+    });    
+    $('.productListItems .product').height(highestBox);
+
+});
+</script>
+{{/if}}
+{{/if}}

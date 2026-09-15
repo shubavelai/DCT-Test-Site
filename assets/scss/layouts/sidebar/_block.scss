@@ -1,0 +1,74 @@
+// =============================================================================
+// SIDEBAR BLOCKS (CSS)
+// =============================================================================
+
+
+// Block
+// -----------------------------------------------------------------------------
+
+.sidebarBlock {
+    + .sidebarBlock {
+        border-top: 0;
+        margin-top: 0;
+        padding-top: spacing("single") + spacing("third");
+    }
+}
+
+.sidebarBlock-heading {
+    font-size: remCalc(15px);
+    margin-top: 0;
+    text-transform: inherit;
+
+    &.heading-price {
+        @media (min-width: $screen-medium) {
+            margin-top: -(remCalc(12px));
+        }
+    }
+}
+
+.page-sidebar {
+    .sidebarWrapper, .accordion-block {
+        border: container("border");
+    }
+    .sidebarBlock {
+        h2.sidebarBlock-heading {
+            background: #f2f2f3;
+            padding: 10px 15px;
+            font-size: 1.3rem;
+            color: #000;
+            margin-bottom: 0;
+        }
+        p {
+            padding: 10px 15px;               
+            margin: 0;
+            font-weight: 400;
+        }
+        .navList {
+            padding: 10px 15px;
+            margin: 0;
+            .navList-item {
+                .navList-action {
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .accordion-block {
+        .accordion-navigation {
+            background: #f2f2f3;
+            padding: 10px 15px;
+            margin-bottom: 0 !important;
+            border-radius: 0;
+            .accordion-title {
+                font-size: 1.3rem;
+                font-weight: 500;
+            }
+        }
+        .accordion-content {
+            padding: 10px 15px;
+            .navList {
+                padding: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,140 @@
+{{#if theme_settings.theme_electronics}}
+<article
+    class="card card--item
+    {{#if alternate}} card--alternate{{/if}}"
+    attr-cards-ids="{{id}}"
+    data-test="card-{{id}}"
+    data-event-type="{{event}}"
+    data-entity-id="{{id}}"
+    data-position="{{position}}"
+    data-name="{{name}}"
+    data-product-category="
+    {{#each category}}
+        {{#if @last}}
+            {{this}}
+        {{else}}
+            {{this}},
+        {{/if}}
+    {{/each}}"
+    data-product-brand="{{brand.name}}"
+    data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if price.with_tax}}
+            {{price.with_tax.value}}
+        {{else}}
+            {{price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+>
+    
+    <figure class="card-figure">
+
+        <a href="{{url}}"
+           class="card-figure__link"
+           aria-label="{{> components/products/product-info}}"
+           data-event-type="product-click"
+        >
+            <div class="card-img-container">
+                {{> components/common/responsive-img
+                    image=image
+                    class="card-image"
+                    fallback_size=theme_settings.productgallery_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                }}
+            </div>
+        </a>
+    </figure>
+    <div class="card-body">
+
+
+        
+        <h3 class="card-title">
+            <a aria-label="{{> components/products/product-info}}"
+               href="{{url}}"
+               data-event-type="product-click"
+            >
+                {{name}}
+            </a>
+        </h3>
+    </div>
+</article>
+{{else}} 
+ {{#if theme_settings.theme_automotive}}
+<article
+    class="card card--item
+    {{#if alternate}} card--alternate{{/if}}"
+    attr-cards-ids="{{id}}"
+    data-test="card-{{id}}"
+    data-event-type="{{event}}"
+    data-entity-id="{{id}}"
+    data-position="{{position}}"
+    data-name="{{name}}"
+    data-product-category="
+    {{#each category}}
+        {{#if @last}}
+            {{this}}
+        {{else}}
+            {{this}},
+        {{/if}}
+    {{/each}}"
+    data-product-brand="{{brand.name}}"
+    data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if price.with_tax}}
+            {{price.with_tax.value}}
+        {{else}}
+            {{price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+>
+    
+    <figure class="card-figure">
+
+        <a href="{{url}}"
+           class="card-figure__link"
+           aria-label="{{> components/products/product-info}}"
+           data-event-type="product-click"
+        >
+            <div class="card-img-container">
+                {{> components/common/responsive-img
+                    image=image
+                    class="card-image"
+                    fallback_size=theme_settings.productgallery_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                }}
+            </div>
+        </a>
+    </figure>
+    <div class="card-body">
+
+        
+        <div class="card-detail d-flex">
+            {{#if sku}}
+                <p class="card-sku">SKU: {{sku}}</p>
+            {{/if}}
+        </div>
+        <h3 class="card-title">
+            <a aria-label="{{> components/products/product-info}}"
+               href="{{url}}"
+               data-event-type="product-click"
+            >
+                {{name}}
+            </a>
+        </h3>
+        <div class="card-text card--price" data-test-info-type="price">
+            {{#or customer (unless settings.hide_price_from_guests)}}
+                {{> components/products/price price=price}}
+            {{else}}
+                {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+    </div>
+</article>
+{{/if}}
+{{/if}}

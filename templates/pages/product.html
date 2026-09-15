@@ -1,0 +1,82 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{inject 'productId' product.id}}
+
+{{#partial "page"}}
+
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+    {{#each product.shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+
+    <div>
+        {{> components/products/product-view}}
+
+        {{{region name="product_below_content"}}}
+
+        {{#if product.videos.list.length}}
+            {{> components/products/videos product.videos}}
+        {{/if}}
+
+        {{#all settings.show_product_reviews theme_settings.show_product_reviews (if theme_settings.show_product_details_tabs '!==' true)}}
+            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+        {{/all}}
+
+        {{> components/products/tabs}}
+        
+    </div>
+
+    {{> components/products/schema}}
+
+    {{#if theme_settings.show_product_sticky_add_to_cart '===' true}}
+        <div class="productView productView-sticky" data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}"
+            data-product-variant="single-product-option">
+            <div class="container">
+                <div class="productView-options productView-options-custom">
+                    <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                        data-cart-item-add-bc>
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="product_id" value="{{product.id}}" />
+                        {{#if product.cart_order_source}}
+                            <input type="hidden" name="cart_order_source" value="{{product.cart_order_source}}" />
+                        {{/if}}
+                        <div class="product_sticky_option" data-product-option-change-bc style="display:none;">
+                            {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                            {{#each product.options}}
+                                {{{dynamicComponent 'components/products/options-custom'}}}
+                            {{/each}}
+                        </div>
+                        {{> components/products/add-to-cart}}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 500){
+                    if (!$('.productView-sticky').hasClass('sticky')) {
+                        $('.productView-sticky').addClass('sticky');
+                        // Get the height of the .productView-sticky element
+                        var stickyHeight = $('.productView-sticky').outerHeight();
+                        // Set the height as a custom CSS property (--stickydiv-height)
+                        $('body').css('--stickydiv-height', stickyHeight + 'px');
+                    }
+                } else{
+                    $('.productView-sticky').removeClass('sticky');
+                }
+            });
+        </script>
+    {{/if}}
+{{/partial}}
+{{> layout/base}}

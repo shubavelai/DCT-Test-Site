@@ -1,0 +1,172 @@
+<!-- Sticky Cart Section -->
+<div id="stickyCart" class="sticky-cart">
+    <div class="sticky-cart-content">
+        <div class="sticky-cart-image">
+            <img src="" alt="" id="sticky-cart-image">
+        </div>
+        <div class="sticky-cart-details">
+            <h3 id="sticky-cart-title"></h3>
+            <span id="sticky-cart-price"></span>
+            <div id="sticky-cart-variant"></div>
+            <div class="sticky-cart-qty">
+                <input type="number" id="sticky-cart-qty" value="1" min="1" />
+            </div>
+            <button id="sticky-cart-button" class="btn btn-primary">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Sticky Cart Styles */
+.sticky-cart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    display: none; /* Initially hidden */
+}
+
+.sticky-cart img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.sticky-cart-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sticky-cart-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sticky-cart button {
+    margin-top: 10px;
+}
+
+.sticky-cart-qty input {
+    width: 60px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const stickyCart = document.getElementById('stickyCart');
+    const stickyImage = document.getElementById('sticky-cart-image');
+    const stickyTitle = document.getElementById('sticky-cart-title');
+    const stickyPrice = document.getElementById('sticky-cart-price');
+    const stickyVariant = document.getElementById('sticky-cart-variant');
+    const stickyQty = document.getElementById('sticky-cart-qty');
+    const stickyButton = document.getElementById('sticky-cart-button');
+
+    // Fetch product details from DOM (adjust the selectors as needed)
+    const productImage = document.querySelector('.productView-img-container img').src || '';  // Ensure the image URL is correctly retrieved
+    const productTitle = document.querySelector('.productView-title').innerText || '';  // Ensure the product title is correctly retrieved
+    const productPrice = document.querySelector('.productView-price .price').innerText || '';  // Ensure the price is correctly retrieved
+    const productVariants = document.querySelector('.product-variants'); // Adjust based on your theme
+    const productAddToCart = document.querySelector('.addToCart-button'); // Adjust based on your theme
+
+    // Set product details in sticky cart
+    stickyImage.src = productImage;
+    stickyTitle.textContent = productTitle;
+    stickyPrice.textContent = productPrice;
+
+    // Set variants dropdown (if applicable)
+    if (productVariants) {
+        stickyVariant.innerHTML = productVariants.innerHTML;  // Copy variant options
+    }
+
+    // Toggle visibility of sticky cart on scroll
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            stickyCart.style.display = 'flex';
+        } else {
+            stickyCart.style.display = 'none';
+        }
+    });
+
+    // Add to Cart functionality
+    stickyButton.addEventListener('click', function() {
+        const qty = parseInt(stickyQty.value, 10);
+        const variantId = document.querySelector('select[name="variant_id"]')?.value || null; // Get variant ID, if available
+
+        // Add to cart logic (use BigCommerce's AJAX API or an alternative API)
+        const data = {
+            product_id: document.querySelector('input[name="product_id"]').value, // Use the product ID from the DOM
+            quantity: qty,
+            variant_id: variantId, // Variant (if any)
+        };
+
+        // AJAX call to add the product to the cart
+        fetch('/api/storefront/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add your API key if needed
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Product added to cart!');
+                // Optionally update cart count or display cart sidebar
+            } else {
+                alert('Error adding to cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error adding to cart');
+        });
+    });
+});
+</script>
+
+
+
+<!-- <section class="productStickyAdd fading" id="stickyIckyStuff">
+    <div class="productStickyAdd-container">
+        <div class="sticky-labeling">
+            <span class="stickyTitle">
+                {{product.title}}
+            </span>
+            <span class="stickyPrice">
+                {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                {{> components/products/price price=product.price schema_org=schema}}
+                {{else}}
+                {{> components/common/login-for-pricing}}
+                {{/or}}
+            </span>
+        </div>
+        <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+              data-cart-item-add>
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="product_id" value="{{product.id}}"/>
+            <div data-product-option-change style="display:none;">
+                {{#each product.options}}
+                {{{dynamicComponent 'components/products/options'}}}
+                {{/each}}
+            </div>
+            {{#if product.can_purchase}}
+                {{> components/products/add-to-cart}}
+            {{/if}}
+            
+        </form>
+    </div>
+</section> -->

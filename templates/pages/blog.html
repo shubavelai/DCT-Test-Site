@@ -1,0 +1,39 @@
+---
+blog:
+    posts:
+        limit: 5
+        pages: 3
+        summary: 200
+---
+{{#partial "head"}}
+    {{#if pagination.blog.previous}}
+        <link rel="prev" href="{{{pagination.blog.previous}}}">
+    {{/if}}
+    {{#if pagination.blog.next}}
+         <link rel="next" href="{{{pagination.blog.next}}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+    <div class="container">
+    {{#unless theme_settings.hide_blog_page_heading }}
+        <h1 class="page-heading">{{ blog.name }}</h1>
+    {{/unless}}
+    <div class="row">
+    {{#each blog.posts}}
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-4">
+            {{> components/blog/post post=this theme_settings=../theme_settings}}
+        </div>
+    {{/each}}
+    </div>
+
+    {{> components/common/paginator pagination.blog}}
+    </div>
+</main>
+
+{{/partial}}
+{{> layout/base}}

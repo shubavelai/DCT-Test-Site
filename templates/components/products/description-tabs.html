@@ -1,0 +1,179 @@
+<div class="accordions-tabs-wrapper">
+    
+    <div class="tabs-nav">
+        {{#if product.description}}
+        <label for="tab-desc" class="tab-btn" id="label-desc">Description</label>
+        {{/if}}
+        
+        {{#if product.videos.list.length}}
+            <label for="tab-videos" class="tab-btn" id="label-videos">Product Videos</label>
+        {{/if}}
+
+        {{#if product.warranty}}
+        <label for="tab-warranty" class="tab-btn" id="label-warranty">Certificates & Catalogs</label>
+        {{/if}}
+        
+        {{#all settings.show_product_reviews theme_settings.show_product_reviews product.reviews.total}}
+        <label for="tab-reviews" class="tab-btn" id="label-reviews">{{lang 'products.reviews.header' total=product.reviews.total}}</label>
+        {{/all}}
+    </div>
+
+    
+    <div class="tabs-content-container">
+        {{#if product.description}}
+        <input type="radio" name="product-tabs" id="tab-desc" checked>
+        <div class="tab-panel" id="panel-desc">
+            <div id="full-description-content">
+                {{{product.description}}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if product.warranty}}
+        <input type="radio" name="product-tabs" id="tab-warranty">
+        <div class="tab-panel" id="panel-warranty">
+            <p>{{{product.warranty}}}</p>
+        </div>
+        {{/if}}
+
+        {{#if product.videos.list.length}}
+        <input type="radio" name="product-tabs" id="tab-videos">
+        <div class="tab-panel" id="panel-videos">
+            
+           {{> components/products/videos product.videos}}
+        </div>
+        {{/if}}
+
+        {{#all settings.show_product_reviews theme_settings.show_product_reviews product.reviews.total}}
+        <input type="radio" name="product-tabs" id="tab-reviews">
+        <div class="tab-panel" id="panel-reviews">
+            <dl class="productView-info productReviewTab">
+                {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+            </dl>
+        </div>
+        {{/all}}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const descContainer = document.getElementById('full-description-content');
+    
+    if (descContainer) {
+        let htmlContent = descContainer.innerHTML;
+        if (htmlContent.includes('videoinfodetails')) {
+            let parts = htmlContent.split('videoinfodetails');
+            
+            descContainer.innerHTML = parts[0];
+            
+            const videoDescPart = document.getElementById('video-description-part');
+            if (videoDescPart && parts[1]) {
+                videoDescPart.innerHTML = parts[1];
+            }
+        }
+    }
+
+    // Tabs switching logic
+    const tabLabels = document.querySelectorAll('.tabs-nav .tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    function switchTab(targetId) {
+        tabLabels.forEach(l => l.classList.remove('is-active'));
+        tabPanels.forEach(p => p.style.display = 'none');
+
+        const matchingInput = document.getElementById(targetId);
+        const targetPanel = document.getElementById('panel-' + targetId.replace('tab-', ''));
+
+        if (matchingInput) matchingInput.checked = true;
+        if (targetPanel) targetPanel.style.display = 'block';
+
+        tabLabels.forEach(label => {
+            if (label.getAttribute('for') === targetId) {
+                label.classList.add('is-active');
+            }
+        });
+    }
+
+    tabLabels.forEach(label => {
+        label.addEventListener('click', function() {
+            const targetRadioId = this.getAttribute('for');
+            switchTab(targetRadioId);
+            history.pushState(null, null, '#' + targetRadioId);
+        });
+    });
+
+    // Initial check on load or hash
+    if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '');
+        if (document.getElementById(hash)) {
+            switchTab(hash);
+        }
+    } else {
+        const checkedInput = document.querySelector('.tabs-content-container input[type="radio"]:checked');
+        if (checkedInput) {
+            switchTab(checkedInput.id);
+        }
+    }
+});
+</script>
+
+
+<style>
+.accordions-tabs-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.tabs-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border-bottom: 2px solid #e1e1e1;
+}
+p a{
+    color: #7e4227;
+}
+.tab-btn {
+    padding: 12px 20px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: none;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+}
+
+.tabs-content-container input[type="radio"] {
+    display: none;
+}
+
+.tab-panel {
+    display: none;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.tabs-nav .tab-btn.is-active {
+    background: #b0c4de !important; 
+    color: #000000 !important;
+    border-color: #99b1d1 !important;
+}
+
+
+.tabs-content-container .tab-panel .techdata a[href*=".pdf"]{
+    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 482.14 482.14'%3E%3Cpath d='M142.024,310.194c0-8.007-5.556-12.782-15.359-12.782c-4.003,0-6.714,0.395-8.132,0.773v25.69 c1.679,0.378,3.743,0.504,6.588,0.504C135.57,324.379,142.024,319.1,142.024,310.194z'/%3E%3Cpath d='M202.709,297.681c-4.39,0-7.227,0.379-8.905,0.772v56.896c1.679,0.394,4.39,0.394,6.841,0.394 c17.809,0.126,29.424-9.677,29.424-30.449C230.195,307.231,219.611,297.681,202.709,297.681z'/%3E%3Cpath d='M315.458,0H121.811c-28.29,0-51.315,23.041-51.315,51.315v189.754h-5.012c-11.418,0-20.678,9.251-20.678,20.679v125.404 c0,11.427,9.259,20.677,20.678,20.677h5.012v22.995c0,28.305,23.025,51.315,51.315,51.315h264.223 c28.272,0,51.3-23.011,51.3-51.315V121.449L315.458,0z M99.053,284.379c6.06-1.024,14.578-1.796,26.579-1.796 c12.128,0,20.772,2.315,26.58,6.965c5.548,4.382,9.292,11.615,9.292,20.127c0,8.51-2.837,15.745-7.999,20.646 c-6.714,6.32-16.643,9.157-28.258,9.157c-2.585,0-4.902-0.128-6.714-0.379v31.096H99.053V284.379z M386.034,450.713H121.811 c-10.954,0-19.874-8.92-19.874-19.889v-22.995h246.31c11.42,0,20.679-9.25,20.679-20.677V261.748 c0-11.428-9.259-20.679-20.679-20.679h-246.31V51.315c0-10.938,8.921-19.858,19.874-19.858l181.89-0.19v67.233 c0,19.638,15.934,35.587,35.587,35.587l65.862-0.189l0.741,296.925C405.891,441.793,396.987,450.713,386.034,450.713z M174.065,369.801v-85.422c7.225-1.15,16.642-1.796,26.58-1.796c16.516,0,27.226,2.963,35.618,9.282 c9.031,6.714,14.704,17.416,14.704,32.781c0,16.643-6.06,28.133-14.453,35.224c-9.157,7.612-23.096,11.222-40.125,11.222 C186.191,371.092,178.966,370.446,174.065,369.801z M314.892,319.226v15.996h-31.23v34.973h-19.74v-86.966h53.16v16.122h-33.42 v19.875H314.892z' fill='rgb(23, 81, 143)' /%3E%3C/svg%3E);
+    background-size: 25px;
+    padding: 5px 0 5px 34px;
+    background-repeat: no-repeat;
+    background-position: left 5px;
+    text-decoration: none;
+    display: block;
+}
+.tabs-content-container table{
+    width: 100%;
+}
+.video-sub{
+    text-align: center;
+}
+</style>

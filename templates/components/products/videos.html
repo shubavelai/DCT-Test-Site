@@ -1,0 +1,48 @@
+<div class="section-spacing">
+    <div class="container">
+        <section class="toggle videoGallery" data-video-gallery>
+            <div class="toggle-content is-open" id="videoGallery-content">
+                
+                <div id="video-description-part" style="margin-bottom: 20px;"></div>
+
+                {{#if this.featured}}
+                <div class="videoGallery-main widescreen" style="margin-bottom: 20px;">
+                    <iframe
+                        id="player"
+                        title="productVideo"
+                        class="lazyload"
+                        type="text/html"
+                        width="640"
+                        height="390"
+                        frameborder="0"
+                        webkitAllowFullScreen
+                        mozallowfullscreen
+                        allowFullScreen
+                        data-src="//www.youtube.com/embed/{{this.featured.id}}?rel=0"
+                        data-video-player>
+                    </iframe>
+                </div>
+                {{/if}}
+
+                {{#if this.list.length}}
+                <ul class="videoGallery-list" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 15px;">
+                    {{#each this.list}}
+                        <li class="videoGallery-item" style="width: calc(33.333% - 10px);">
+                           <a href="#" class="video {{#if @first}}is-active{{/if}}" data-video-item data-video-id="{{id}}" style="text-decoration: none; color: inherit; display: block;">
+                                <div class="video-figure">
+                                 <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/{{id}}/default.jpg" style="width: 100%; height: auto;"/>
+                                </div>
+                                <div class="video-body" style="padding-top: 8px;">
+                                    <h5 class="video-title" style="font-size: 14px; font-weight: 600; margin: 0 0 5px 0;">{{title_long}}</h5>
+                                    <p class="video-description" style="font-size: 12px; color: #666; margin: 0;">{{description_short}}</p>
+                                </div>
+                           </a>
+                       </li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+// =============================================================================
+// ACCOUNT
+// =============================================================================
+
+
+// Account layouts
+// -----------------------------------------------------------------------------
+
+.account {
+    margin-bottom: spacing("single");
+}
+
+.account--fixed {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+        width: grid-calc(12, $total-columns);
+    }
+}
+
+.account--fixedSmall {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+        width: grid-calc(12, $total-columns);
+    }
+}
+
+.account--fixedLarge {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+        width: grid-calc(12, $total-columns);
+    }
+}
+
+.account-head {
+    margin-bottom: spacing("double");
+    text-align: center;
+
+    .alertBox {
+        padding-left: spacing("double");
+        padding-right: spacing("double");
+        text-align: left;
+    }
+}
+
+.account-body {
+    @include grid-row($behavior: "nest");
+    margin: 0;
+    background: #f0f0f0;
+    padding: 30px;
+    .form {
+        margin-bottom: 0;
+        .form-input {
+            border-color: #c9c9c9;
+        }
+    }
+    .form-actions { 
+        margin-top: 0;
+    }
+    .already-login {
+        margin-top: 1rem;
+        column-gap: 0.3rem;
+        p {
+            margin: 0;
+        }
+    }
+}
+.g-recaptcha {
+    display: flex;
+    justify-content: center;
+}
+
+.account-content {
+    @include grid-column(12);
+    padding-right: 2rem;
+}
+
+.account-content--fixed {
+
+    @include breakpoint("medium") {
+        width: grid-calc(8, $total-columns);
+    }
+}
+
+.account-content--fixedSmall {
+
+    @include breakpoint("medium") {
+        width: grid-calc(8, $total-columns);
+    }
+}
+
+.account-sidebar {
+    @include grid-column(12);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    padding-left: 2rem;
+
+    @include breakpoint("medium") {
+        width: grid-calc(4, $total-columns);
+
+        .account-content--fixedSmall + & {
+            float: right;
+        }
+    }
+}
+
+.form-prefixPostfix .button {
+    max-width: 200px;
+    margin: 0;
+}
+.forgotPassword-action {
+    align-items: center;
+    column-gap: 2rem;
+    margin-top: 1.8rem;
+}
+
+@media screen and (max-width: 800px) {
+    .account {
+        .account-head {
+            margin-bottom: 2rem;
+        }
+    }
+    .account-body {
+        padding: 20px 30px;
+        .account-content {
+            padding: 0;
+        }
+        .pagination {
+            margin-top: 1rem;
+        }
+    }
+}
+@media screen and (max-width: 550px) {
+    .account-body {
+        padding: 20px;
+    }
+    .account-product-figure {
+        width: 85px;
+        margin: 0 1rem 0 0;
+    }
+    .account-product-body {
+        padding-bottom: 2.5rem;
+    }
+    .account-head .alertBox {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .account-content .form-field {
+        margin-bottom: 1rem;
+    }   
+
+    .form-prefixPostfix .button {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+}

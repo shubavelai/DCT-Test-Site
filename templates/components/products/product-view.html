@@ -1,0 +1,1219 @@
+{{inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
+<div class="container">
+<div class="productView"
+    data-event-type="product"
+    data-entity-id="{{product.id}}"
+    data-name="{{product.title}}"
+    data-product-category="
+    {{#each product.category}}
+        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
+    {{/each}}"
+    data-product-brand="{{product.brand.name}}"
+    data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if product.price.with_tax}}
+            {{product.price.with_tax.value}}
+        {{else}}
+            {{product.price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+    data-product-variant="single-product-option">
+    
+    {{#each product.reviews.messages}}
+        {{#if error}}
+            {{> components/common/alert/alert-error error}}
+        {{/if}}
+        {{#if success}}
+            {{> components/common/alert/alert-success success}}
+        {{/if}}
+    {{/each}}
+
+    <div class="productView--details row">
+        
+        {{#if theme_settings.theme_automotive}}
+        <section class="productView-images col-xl-7 col-md-6 col-12" data-image-gallery>
+            <div class="productImage-sticky">
+                {{!--
+                    Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+                    for variant/rule image replacement
+                --}}
+                {{#if product.images.length '>' 1 }}
+                {{> components/carousel-content-announcement}}
+                {{/if}}
+                <figure class="productView-image"
+                        data-image-gallery-main
+                        {{#if product.main_image}}
+                        data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+                        {{/if}}
+                        >
+                    <div class="productView-img-container">
+                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                        {{#if product.main_image}}
+                            <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+                                target="_blank">
+                        {{/if}}
+                        {{> components/common/responsive-img
+                            image=product.main_image
+                            class="productView-image--default"
+                            fallback_size=theme_settings.product_size
+                            lazyload=theme_settings.lazyload_mode
+                            default_image=theme_settings.default_image_product
+                            otherAttributes="data-main-image"
+                        }}
+                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                        {{#if product.main_image}}
+                            </a>
+                        {{/if}}
+                    </div>
+                </figure>
+                <div class="productView-thumbnails"{{#gt product.images.length 4}} data-slick='{
+                        "infinite": false,
+                        "mobileFirst": true,
+                        "dots": false,
+                        "accessibility": false,
+                        "slidesToShow": 4,
+                        "vertical": true,
+                        "verticalSwiping": true,
+                        "slidesToScroll": 1,
+                        "responsive": [
+                            {
+                                "breakpoint": 991,
+                                "settings": {
+                                    "slidesToShow": 4,
+                                    "slidesToScroll": 2
+                                }
+                            },
+                            {
+                                "breakpoint": 0,
+                                "settings": {
+                                    "vertical": false,
+                                    "verticalSwiping": false
+                                }
+                            }
+                        ]
+                    }'{{/gt}}>
+                    {{#each product.images}}
+                        <div class="productView-thumbnail">
+                            <a
+                                class="productView-thumbnail-link"
+                                href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                data-image-gallery-item
+                                data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                                data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                                data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                            >
+                            {{> components/common/responsive-img
+                                image=this
+                                fallback_size=../theme_settings.productview_thumb_size
+                                lazyload=../theme_settings.lazyload_mode
+                            }}
+                            </a>
+                        </div>
+                    {{/each}}
+                    {{#each product.videos.list}}
+                       <div class="productView-thumbnail productView-thumbnail-video" data-video-item>
+                            <a class="productView-thumbnail-link" href="javascript:void(0);" onclick="openVideoModal('{{id}}')">
+                                <img src="//img.youtube.com/vi/{{id}}/hqdefault.jpg" alt="{{title}}" loading="lazy">
+                                <span class="video-play-icon" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); color: #fff; padding: 5px 10px; border-radius: 50%; font-size: 12px;">▶</span>
+                            </a>
+                        </div>
+                   {{/each}}
+                </div>
+            </div>
+        </section>
+        {{else}}
+        <section class="productView-images col-xl-6 col-md-6 col-12" data-image-gallery>
+            <div class="productImage-sticky">
+                {{!--
+                    Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+                    for variant/rule image replacement
+                --}}
+                {{#if product.images.length '>' 1 }}
+                {{> components/carousel-content-announcement}}
+                {{/if}}
+                <figure class="productView-image"
+                        data-image-gallery-main
+                        {{#if product.main_image}}
+                        data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+                        {{/if}}
+                        >
+                    <div class="productView-img-container">
+                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                        {{#if product.main_image}}
+                            <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+                                target="_blank">
+                        {{/if}}
+                        {{> components/common/responsive-img
+                            image=product.main_image
+                            class="productView-image--default"
+                            fallback_size=theme_settings.product_size
+                            lazyload=theme_settings.lazyload_mode
+                            default_image=theme_settings.default_image_product
+                            otherAttributes="data-main-image"
+                        }}
+                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                        {{#if product.main_image}}
+                            </a>
+                        {{/if}}
+                    </div>
+                </figure>
+                <div class="productView-thumbnails"{{#gt product.images.length 4}} data-slick='{
+                        "infinite": false,
+                        "mobileFirst": true,
+                        "dots": false,
+                        "accessibility": false,
+                        "slidesToShow": 4,
+                        "slidesToScroll": 4
+                    }'{{/gt}}>
+                    {{#each product.images}}
+                        <div class="productView-thumbnail">
+                            <a
+                                class="productView-thumbnail-link"
+                                href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                data-image-gallery-item
+                                data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                                data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                                data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                            >
+                            {{> components/common/responsive-img
+                                image=this
+                                fallback_size=../theme_settings.productview_thumb_size
+                                lazyload=../theme_settings.lazyload_mode
+                            }}
+                            </a>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        
+        {{/if}}
+        
+        <div class="custom-product-action-buttons">
+            <button class="button ar-button" id="trigger-ar">
+                See it in your room (AR)
+            </button>
+            <button class="button calculator-button" id="trigger-calculator">
+                Project calculator
+            </button>
+        </div>
+
+        <div class="{{#if theme_settings.theme_automotive}}productVIew-info product-description col-xl-5 col-md-6 col-12{{else}}productVIew-info col-xl-6 col-md-6 col-12{{/if}}">
+            <section class="productView-details product-data">
+                <div class="productView-product">
+                    {{#if product.brand}}
+                        <h2 class="productView-brand">
+                            <a href="{{product.brand.url}}"><span>{{product.brand.name}}</span></a>
+                        </h2>
+                    {{/if}}
+                    <h1 class="productView-title">{{product.title}}</h1>
+                    <div class="productView-details-description">
+                        <span class="productdetial-sku">Model #</span><span class="productView-info-value" data-product-sku>{{product.sku}}</span>
+                    </div>
+                    
+                    <div class="productView-rating">
+                        {{#if settings.show_product_rating}}
+                            {{> components/products/ratings rating=product.rating}}
+                            {{#if product.num_reviews '>' 0}}
+                                <a href="{{product.url}}{{#if is_ajax}}#product-reviews{{/if}}" id="productReview_link">
+                                    {{lang 'products.reviews.link_to_review' total=product.num_reviews}}
+                                </a>
+                            {{else}}
+                                <span>{{lang 'products.reviews.link_to_review' total=product.num_reviews}}</span>
+                            {{/if}}
+                        {{/if}}
+                        {{#if settings.show_product_reviews}}
+                            <a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+                            class="productView-reviewLink productView-reviewLink--new"
+                            {{#unless is_ajax}}data-reveal-id="modal-review-form"{{/unless}}
+                            role="button"
+                            >
+                            {{lang 'products.reviews.new'}}
+                            </a>
+                            {{#unless is_ajax}}
+                                {{> components/products/modals/writeReview}}
+                            {{/unless}}
+                        {{/if}}
+                    </div>
+
+                    {{product.detail_messages}}
+                    
+                </div>
+            </section>
+            {{{region name="product_below_reivews"}}}
+
+            <section class="productView-details product-options">
+                <div class="productView-options">
+                    <div class="custom-price-section">
+                        {{#if product.release_date }}
+                            <p>{{product.release_date}}</p>
+                        {{/if}}
+                        {{#if product.call_for_price}}
+                            <p class="productView-price">
+                                <span>{{product.call_for_price}}</span>
+                            </p>
+                        {{/if}}
+                        <div class="productView-price">
+                            {{#or customer (unless settings.hide_price_from_guests)}}
+                                {{> components/products/price price=product.price}}
+                            {{else}}
+                                {{> components/common/login-for-pricing}}
+                            {{/or}}
+                        </div>
+                        {{{region name="product_below_price"}}}
+                        
+                        <!---- Update price ---->
+                        <div id="custom-pricing-logic" style="display: none; margin-left: 15px;">
+                            <div id="display-was-sqft" style="text-decoration: line-through; color: #888; font-size: 12px; margin-bottom: 2px;"></div>
+                            <div style="font-size: 14px;color: #444;font-weight:100;margin-right: 5px;"><span id="display-price-per-ft">$0.00</span></div>
+                            <div id="display-total-sqft" style="font-size: 14px; color: #444;font-weight:100;margin-left: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="action-row-container">
+                    <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                        data-cart-item-add>
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="product_id" value="{{product.id}}"/>
+                        {{#if product.cart_order_source}}
+                            <input type="hidden" name="cart_order_source" value="{{product.cart_order_source}}"/>
+                        {{/if}}
+                        <div data-product-option-change class="product-variants">
+                            {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                            {{#each product.options}}
+                                {{{dynamicComponent 'components/products/options'}}}
+                            {{/each}}
+                        </div>
+                        <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                            <label class="form-label form-label--alternate">
+                                {{lang 'products.current_stock'}}
+                                <span data-product-stock>{{product.stock_level}}</span>
+                            </label>
+                        </div>
+                        {{> components/products/add-to-cart with_wallet_buttons=true}}
+                        {{#if product.out_of_stock}}
+                            {{#if product.out_of_stock_message}}
+                                {{> components/common/alert/alert-error product.out_of_stock_message}}
+                            {{else}}
+                                {{> components/common/alert/alert-error (lang 'products.sold_out')}}
+                            {{/if}}
+                        {{/if}}
+                    </form>
+                    {{#if settings.show_wishlist}}
+                        <!-- {{> components/common/wishlist-dropdown}} -->
+                        <form action="{{product.add_to_wishlist_url}}" class="form form-wishlist form-action" data-wishlist-add method="post">
+    <a aria-controls="wishlist-dropdown"
+       aria-expanded="false"
+       class="button dropdown-menu-button wishlist-button"
+       data-dropdown="wishlist-dropdown"
+       href="#"
+       
+    >
+        <span>{{lang 'account.wishlists.add_item'}}</span>
+        <i aria-hidden="true" class="icon">
+            <svg>
+                <use href="#icon-chevron-down" />
+            </svg>
+        </i>
+    </a>
+    <ul aria-hidden="true" class="dropdown-menu" data-dropdown-content id="wishlist-dropdown">
+        {{#if customer.wishlists}}
+            {{#each customer.wishlists}}
+                <li>
+                    <input class="button {{#if this.num_items '!==' '0'}}button--has-items{{/if}}"
+                           formaction="{{this.add_url}}&product_id={{../product.id}}"
+                           type="submit"
+                           value="{{this.name}}"
+                    >
+                </li>
+            {{/each}}
+        {{else}}
+        <li>
+            <input class="button" type="submit" value="{{lang 'account.wishlists.add_to_default'}}">
+        </li>
+        {{/if}}
+        <li>
+            <a data-wishlist class="button" href="/wishlist.php?action=addwishlist&product_id={{product.id}}">{{lang 'account.wishlists.create_new'}}</a>
+        </li>
+    </ul>
+</form>
+{{/if}}
+</div>
+                </div>
+                <dl class="productView-info">
+                    <div class="single-infoValue d-flex">
+                        <dt class="productView-info-name sku-label"{{#unless product.sku}} style="display: none;"{{/unless}}>{{lang 'products.sku'}}</dt>
+                        <dd class="productView-info-value" data-product-sku>{{product.sku}}</dd>
+                    </div>
+                    {{#if product.upc}}
+                    <div class="single-infoValue d-flex">
+                        <dt class="productView-info-name upc-label"{{#unless product.upc}} style="display: none;"{{/unless}}>{{lang 'products.upc'}}</dt>
+                        <dd class="productView-info-value" data-product-upc>{{product.upc}}</dd>
+                    </div>
+                    {{/if}}
+                    {{#if product.condition}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.condition'}}</dt>
+                            <dd class="productView-info-value">{{product.condition}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#if product.availability}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.availability'}}</dt>
+                            <dd class="productView-info-value">{{product.availability}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#all product.weight theme_settings.show_product_weight}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.weight'}}</dt>
+                            <dd class="productView-info-value" data-product-weight>{{product.weight}}</dd>
+                        </div>
+                    {{/all}}
+                    {{#all product.width product.height product.depth theme_settings.show_product_dimensions}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.width'}}</dt>
+                            <dd class="productView-info-value" data-product-width>
+                                {{product.width}}
+                                {{#if settings.measurements.length '==' 'Centimeters'}}
+                                ({{lang 'products.measurement.metric'}})
+                                {{else}}
+                                ({{lang 'products.measurement.imperial'}})
+                                {{/if}}
+                            </dd>
+                        </div>
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.height'}}</dt>
+                            <dd class="productView-info-value" data-product-height>
+                                {{product.height}}
+                                {{#if settings.measurements.length '==' 'Centimeters'}}
+                                ({{lang 'products.measurement.metric'}})
+                                {{else}}
+                                ({{lang 'products.measurement.imperial'}})
+                                {{/if}}
+                            </dd>
+                        </div> 
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.depth'}}</dt>
+                            <dd class="productView-info-value" data-product-depth>
+                                {{product.depth}}
+                                {{#if settings.measurements.length '==' 'Centimeters'}}
+                                ({{lang 'products.measurement.metric'}})
+                                {{else}}
+                                ({{lang 'products.measurement.imperial'}})
+                                {{/if}}
+                            </dd>
+                        </div>
+                    {{/all}}
+                    {{#if product.min_purchase_quantity}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name min_purchase_quantity">{{lang 'products.min_purchase_quantity'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.min_purchase_quantity}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#if product.max_purchase_quantity}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.max_purchase_quantity'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.max_purchase_quantity}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#if product.gift_wrapping_available}}
+                        <div class="single-infoValue d-flex">
+                            <dt class="productView-info-name">{{lang 'products.gift_wrapping'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.gift_wrapping_available'}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#if product.shipping}}
+                        {{#if product.shipping.calculated}}
+                            <div class="single-infoValue d-flex">
+                                <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                                <dd class="productView-info-value">{{lang 'products.shipping_calculated'}}</dd>
+                            </div>
+                        {{else}}
+                            {{#if product.shipping.price.value '===' 0}}
+                                <div class="single-infoValue d-flex">
+                                    <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                                    <dd class="productView-info-value">{{lang 'products.shipping_free'}}</dd>
+                                </div>  
+                            {{else}}
+                                <div class="single-infoValue d-flex">
+                                    <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                                    <dd class="productView-info-value">{{lang 'products.shipping_fixed' amount=product.shipping.price.formatted}}</dd>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                    {{{region name="product_below_shipping"}}}
+                    {{#each product.custom_fields}}
+                    <div class="single-infoValue d-flex">
+                        <dt class="productView-info-name">{{name}}:</dt>
+                        <dd class="productView-info-value">{{{value}}}</dd>
+                    </div>
+                    {{/each}}
+
+                    {{#if settings.bulk_discount_enabled}}
+                        <div class="single-infoValue d-flex productView-info-bulkPricing">
+                            {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
+                        </div>
+                    {{/if}}
+        
+
+                    <!-- {{#if theme_settings.show_custom_fields_tabs '!==' true}}
+                        {{> components/products/custom-fields }}
+                    {{/if}} -->
+                </dl>
+                {{> components/common/share url=product.url}}
+            </section>
+        </div>
+    </div>   
+    
+<!-- Calc Popup Code Start--> 
+   
+<div id="product-category-list" data-categories="{{#each product.category}}{{this.name}},{{/each}}" style="display:none;"></div>
+
+<div id="project-calculator-modal" class="custom-calculator-popup-wrapper" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center;">
+    <div class="calculator-popup-content" style="background: #fff; padding: 30px; width: 90%; max-width: 600px; border-radius: 6px; position: relative; max-height: 90vh; overflow-y: auto;">
+        <span class="calculator-close-btn" style="position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; font-weight: bold;">&times;</span>
+        
+        <!--<div class="ProCalculatorTop">
+                <p>Images are not true representations of the actual color of the product. Be sure to <a href="/categories/Samples/" target="_blank">order samples</a> to make sure the colors work for you.</p>
+            </div>-->
+        
+        <div class="ProCalculatorBottom">
+            <div class="BoxDetailTop">
+                <p>How Many Pieces Do I Need?</p>
+                <p style="color:#000!important;font-weight:700;font-size:18px!important">Project Estimator</p>
+                
+                <div id="button-block">
+                   
+                   <!-- 1. Ceiling Tiles Calculator -->
+                   <div class="calc-section-item category-calc-box" data-cat="Ceiling Tiles" style="margin-bottom: 15px; display:none;">
+                       <button class="initialism slide_open btn btn-success" style="width: 100%; text-align: left; padding: 10px;">Ceiling Tiles Calculator</button>
+                       <div id="slide" class="well calc-form-box" style="display:none; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; margin-top:5px;">  
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Enter Room Length (ft):</label>
+                              <input type="number" id="ceiling_length" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Enter Room Width (ft):</label>
+                              <input type="number" id="ceiling_width" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <button type="button" id="calc_ceiling_btn" class="btn btn-primary" style="padding: 6px 15px;">Calculate</button>
+                          <div id="ceiling_result" style="margin-top:10px; font-weight:bold;"></div>
+                       </div>
+                   </div>
+
+                   <!-- 2. Moldings Calculator -->
+                   <div class="calc-section-item category-calc-box" data-cat="Moldings,Crown Molding" style="margin-bottom: 15px; display:none;">
+                       <button class="initialism slide1_open btn btn-success" style="width: 100%; text-align: left; padding: 10px;">Moldings Calculator</button>
+                       <div id="slide1" class="well calc-form-box" style="display:none; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; margin-top:5px;"> 
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Enter Total Linear Feet:</label>
+                              <input type="number" id="molding_linear_feet" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <button type="button" id="calc_molding_btn" class="btn btn-primary" style="padding: 6px 15px;">Calculate</button>
+                          <div id="molding_result" style="margin-top:10px; font-weight:bold;"></div>
+                       </div>
+                   </div>
+
+                   <!-- 3. Wall Panels Calculator -->
+                   <div class="calc-section-item category-calc-box" data-cat="Wall Panels" style="margin-bottom: 15px; display:none;">
+                       <button class="initialism slide2_open btn btn-success" style="width: 100%; text-align: left; padding: 10px;">Wall Panels Calculator</button>
+                       <div id="slide2" class="well calc-form-box" style="display:none; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; margin-top:5px;"> 
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Wall Height (ft):</label>
+                              <input type="number" id="panel_height" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Wall Width (ft):</label>
+                              <input type="number" id="panel_width" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <button type="button" id="calc_panel_btn" class="btn btn-primary" style="padding: 6px 15px;">Calculate</button>
+                          <div id="panel_result" style="margin-top:10px; font-weight:bold;"></div>
+                       </div>
+                   </div>
+
+                   <!-- 4. Foam Planks Calculator -->
+                   <div class="calc-section-item category-calc-box" data-cat="Foam Planks,Styrofoam Ceiling Planks" style="margin-bottom: 15px; display:none;">
+                       <button class="initialism slide3_open btn btn-success" style="width: 100%; text-align: left; padding: 10px;">Foam Planks Calculator</button>
+                       <div id="slide3" class="well calc-form-box" style="display:none; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; margin-top:5px;">  
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Length (ft):</label>
+                              <input type="number" id="foam_length" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <div class="form-group" style="margin-bottom: 10px;">
+                              <label>Width (ft):</label>
+                              <input type="number" id="foam_width" class="form-control" style="width: 100%; padding: 6px;" />
+                          </div>
+                          <button type="button" id="calc_foam_btn" class="btn btn-primary" style="padding: 6px 15px;">Calculate</button>
+                          <div id="foam_result" style="margin-top:10px; font-weight:bold;"></div>
+                       </div>
+                   </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----- Calc Popup Code end ------->
+            
+    <article class="productView-description">
+        {{#if theme_settings.show_product_details_tabs}}
+            {{> components/products/description-tabs}}
+        {{else}}
+            {{> components/products/description}}
+        {{/if}}
+    </article>
+    </div>
+</div>
+
+<div id="previewModal" class="modal modal--large" data-reveal>
+    {{> components/common/modal/modal-close-btn }}
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-header-title"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const priceSection = document.querySelector('.productView-price');
+        
+        if (!priceSection) return;
+
+        let observer = null;
+
+        function updateSavePrice() {
+            const oldPriceElem = priceSection.querySelector('span[data-product-non-sale-price-without-tax]');
+            const mainPriceElem = priceSection.querySelector('span[data-product-price-without-tax]');
+            
+            const savingContainer = priceSection.querySelector('.price-section--saving, .price.section.saving.price');
+            const savedValueElem = priceSection.querySelector('span[data-product-price-saved]');
+
+            if (oldPriceElem && mainPriceElem) {
+                const oldText = oldPriceElem.innerText.trim();
+                const mainText = mainPriceElem.innerText.trim();
+
+                if (oldText !== '' && mainText !== '') {
+                    const oldVal = parseFloat(oldText.replace(/[^0-9.-]+/g,""));
+                    const mainVal = parseFloat(mainText.replace(/[^0-9.-]+/g,""));
+
+                    if (!isNaN(oldVal) && !isNaN(mainVal) && oldVal > mainVal) {
+                        const saveAmount = (oldVal - mainVal).toFixed(2);
+                        const expectedText = 'Save $' + saveAmount;
+
+                        if (observer) observer.disconnect();
+
+                        // Set the value inside saved span explicitly
+                        if (savedValueElem && savedValueElem.innerText !== expectedText) {
+                            savedValueElem.innerText = expectedText;
+                        }
+
+                        if (savingContainer) {
+                            // Target ONLY the bracket/label spans around it and clear them
+                            const sideSpans = savingContainer.querySelectorAll('span.price');
+                            sideSpans.forEach(span => {
+                                if (span !== savedValueElem) {
+                                    span.innerText = '';
+                                }
+                            });
+                            
+                            savingContainer.style.setProperty('display', 'block', 'important');
+                        }
+
+                        if (observer) observer.observe(priceSection, { childList: true, subtree: true, characterData: true });
+
+                    } else {
+                        if (observer) observer.disconnect();
+                        if (savingContainer) {
+                            savingContainer.style.setProperty('display', 'none', 'important');
+                        }
+                        if (observer) observer.observe(priceSection, { childList: true, subtree: true, characterData: true });
+                    }
+                }
+            }
+        }
+
+        observer = new MutationObserver(function() {
+            updateSavePrice();
+        });
+
+        observer.observe(priceSection, {
+            childList: true,
+            subtree: true,
+            characterData: true
+        });
+
+        updateSavePrice();
+    });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const maxVisibleSwatches = 9;
+    
+    const swatchContainer = document.querySelector('.productView-options [data-product-attribute="swatch"] .form-field-control, .productView-options [data-product-attribute="swatch"]');
+    
+    if (swatchContainer) {
+        const swatches = swatchContainer.querySelectorAll('.form-option-wrapper');
+        
+        if (swatches.length > maxVisibleSwatches) {
+            let hiddenCount = swatches.length - maxVisibleSwatches;
+            
+            swatches.forEach((swatch, index) => {
+                if (index >= maxVisibleSwatches) {
+                    swatch.classList.add('swatch-hidden');
+                }
+            });
+            
+            const plusBox = document.createElement('div');
+            plusBox.className = 'swatch-more-toggle';
+            plusBox.innerHTML = `+${hiddenCount}`;
+            
+            swatches[maxVisibleSwatches - 1].parentNode.insertBefore(plusBox, swatches[maxVisibleSwatches].nextSibling);
+            
+            plusBox.addEventListener('click', function() {
+                swatches.forEach(swatch => {
+                    swatch.classList.remove('swatch-hidden');
+                });
+                plusBox.style.display = 'none'; 
+            });
+        }
+    }
+});
+</script>
+
+<script>
+(function($) {
+    function calculateFinalPricing() {
+        // --- 1. SQFT & LINEAR FT Data Detection ---
+        let rawSqftData = "";
+        let isLinearFt = false;
+        let hasPackIncludesField = false; 
+        
+        $('.productView-info-name').each(function() {
+            let name = $(this).text().trim().toLowerCase();
+            
+            if (name.indexOf('pack includes') !== -1 || name.indexOf('pack_includes') !== -1) {
+                hasPackIncludesField = true;
+            }
+
+            if (name.indexOf('sq_ft_data') !== -1 || name.indexOf('sq_ft_per_pack') !== -1) {
+                rawSqftData = $(this).next('.productView-info-value').text().trim();
+                //$(this).closest('.single-infoValue').hide(); 
+                this.closest('.single-infoValue').style.setProperty('display', 'none', 'important');
+            }
+            
+            if (name.indexOf('linear_ft_data') !== -1 || name.indexOf('linear_ft_per_pack') !== -1 || name.indexOf('linear_foot') !== -1) {
+                rawSqftData = $(this).next('.productView-info-value').text().trim();
+                isLinearFt = true;
+                //$(this).closest('.single-infoValue').hide();
+                this.closest('.single-infoValue').style.setProperty('display', 'none', 'important');
+            }
+        });
+
+        if (!rawSqftData) {
+            $('#custom-pricing-logic').hide();
+            return; 
+        }
+
+        let productTitle = $('.productView-title').text().toLowerCase() || "";
+        let breadcrumbsText = $('.breadcrumbs').text().toLowerCase() || "";
+        let urlPathText = window.location.pathname.toLowerCase() || "";
+        let globalSearchScope = breadcrumbsText + " | " + urlPathText + " | " + productTitle;
+
+        if (globalSearchScope.indexOf('molding') !== -1 || globalSearchScope.indexOf('moulding') !== -1) {
+            isLinearFt = true;
+        }
+
+        let isAccessory = (rawSqftData.toLowerCase() === 'clip' || globalSearchScope.indexOf('clip') !== -1);
+
+        // --- 2. Option Tracking Configuration ---
+        function checkContainerSelected($container) {
+            if ($container.length === 0) return false;
+            if ($container.find('input:checked').length > 0) return true;
+            
+            let selectVal = $container.find('select').val();
+            if (selectVal !== "" && selectVal !== undefined && selectVal !== null) {
+                let $selectedOption = $container.find('select option:selected');
+                if (!$selectedOption.is(':disabled') && selectVal.toLowerCase().indexOf('choose') === -1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function getExactFormContainer(labelText) {
+            return $('.form-field').filter(function() {
+                let labelStr = $(this).find('.form-label').text().trim().toLowerCase() || "";
+                return labelStr.indexOf(labelText.toLowerCase()) !== -1 && !labelStr.includes('acoustical');
+            });
+        }
+
+        let colorContainer = getExactFormContainer("Color");
+        let packContainer = getExactFormContainer("Pack");
+        let sizeContainer = getExactFormContainer("Size");
+        let settingContainer = getExactFormContainer("Setting");
+        let finishContainer = getExactFormContainer("Finish");
+        let materialContainer = getExactFormContainer("Material"); 
+        let substrateContainer = getExactFormContainer("Substrate");
+        let installationContainer = $('.form-field').filter(function() {
+            let labelStr = $(this).find('.form-label').text().trim().toLowerCase() || "";
+            return labelStr.indexOf('installation') !== -1;
+        });
+
+        let hasColorOption = colorContainer.length > 0;
+        let hasPackOption = packContainer.length > 0;
+        let hasSizeOption = sizeContainer.length > 0;
+        let hasSettingOption = settingContainer.length > 0;
+        let hasFinishOption = finishContainer.length > 0;
+        let hasMaterialOption = materialContainer.length > 0;
+        let hasSubstrateOption = substrateContainer.length > 0;
+        let hasInstallationOption = installationContainer.length > 0;
+
+        let colorSelected = checkContainerSelected(colorContainer);
+        let packSelected = checkContainerSelected(packContainer);
+        let sizeSelected = checkContainerSelected(sizeContainer);
+        let settingSelected = checkContainerSelected(settingContainer);
+        let finishSelected = checkContainerSelected(finishContainer);
+        let materialSelected = checkContainerSelected(materialContainer);
+        let substrateSelected = checkContainerSelected(substrateContainer);
+        let installationSelected = checkContainerSelected(installationContainer);
+
+        function normalizeKeyText(str) {
+            let base = str.toLowerCase();
+            if (base.includes('(') && base.includes(')')) {
+                let matches = base.match(/\(([^)]+)\)/);
+                if (matches && matches[1]) {
+                    base = matches[1]; 
+                }
+            }
+            return base.replace(/-/g, ' ') 
+                       .replace(/[^a-z0-9\/x\s]/g, '') 
+                       .replace(/\s+/g, ' ')
+                       .replace(/\s*x\s*/g, 'x') 
+                       .trim();
+        }
+
+        let currentSelections = [];
+        let isSampleSelected = false;
+
+        $('input[name^="attribute"]:checked').each(function() {
+            let text = $(this).next().text().trim().toLowerCase();
+            if (text.includes('yes') || text.includes('nrc')) return;
+            if (text.includes('sample')) isSampleSelected = true;
+            let cleanKey = normalizeKeyText(text);
+            currentSelections.push({
+                full: cleanKey,
+                numbers: text.replace(/[^0-9.]/g, '')
+            });
+        });
+
+        $('select[name^="attribute"]').each(function() {
+            let $selectedOption = $(this).find('option:selected');
+            let selectValue = $(this).val();
+            if (selectValue && selectValue !== "") {
+                let selectedOptionText = $selectedOption.text().trim().toLowerCase();
+                if (selectedOptionText.includes('sample')) isSampleSelected = true;
+                let cleanKey = normalizeKeyText(selectedOptionText);
+                currentSelections.push({
+                    full: cleanKey,
+                    numbers: selectedOptionText.replace(/[^0-9.]/g, '')
+                });
+            }
+        });
+
+        let packText = "";
+        if (packSelected) {
+            let selectedPackInput = packContainer.find('input:checked');
+            if (selectedPackInput.length > 0) {
+                let radioLabel = selectedPackInput.next('label').text().trim();
+                let swatchText = selectedPackInput.next('.form-option').find('.form-option-variant').text().trim();
+                let defaultText = selectedPackInput.next('.form-option').text().trim();
+                packText = (radioLabel || swatchText || defaultText).toLowerCase();
+            } else {
+                packText = packContainer.find('select option:selected').text().trim().toLowerCase();
+            }
+        }
+
+        // --- 3. Price Capture Engine ---
+        let priceElem = $('.price-section--withoutTax').not('.rrp-price--withoutTax, .non-sale-price--withoutTax').first();
+        let nowPriceRaw = priceElem.text().trim();
+        if (!nowPriceRaw) return;
+
+        // --- 4. Visibility Validation Engine ---
+        let shouldShow = true;
+        if (hasColorOption && !colorSelected) shouldShow = false;
+        if (hasPackOption && !packSelected) shouldShow = false;
+        if (hasSizeOption && !sizeSelected) shouldShow = false;
+        if (hasSettingOption && !settingSelected) shouldShow = false; 
+        if (hasFinishOption && !finishSelected) shouldShow = false;   
+        if (hasMaterialOption && !materialSelected) shouldShow = false; 
+        if (hasSubstrateOption && !substrateSelected) shouldShow = false;
+        if (hasInstallationOption && !installationSelected) shouldShow = false;
+
+        if (isSampleSelected || packText.includes('sample')) {
+            shouldShow = false;
+        }
+
+        let addToCartBtn = $('#form-action-addToCart');
+        let isCartDisabled = addToCartBtn.prop('disabled') || addToCartBtn.is(':disabled') || addToCartBtn.hasClass('disabled');
+        let btnText = addToCartBtn.val() || addToCartBtn.text() || "";
+        let isUnavailableText = btnText.toLowerCase().indexOf('unavailable') !== -1 || btnText.toLowerCase().indexOf('out of stock') !== -1;
+
+        if (isCartDisabled || isUnavailableText) {
+            shouldShow = false;
+        }
+
+        if (!shouldShow) {
+            $('#custom-pricing-logic').hide();
+            return;
+        }
+
+        // --- 5. Price & Mapping Logic ---
+        let nowPrice = parseFloat(nowPriceRaw.replace(/[^0-9.-]+/g, "")) || 0;
+        if (nowPrice <= 0) {
+            $('#custom-pricing-logic').hide();
+            return;
+        }
+
+        // --- 6. UI Rendering Engine ---
+        if (isAccessory) {
+            let itemsCount = 0;
+            for (let selection of currentSelections) {
+                let parsedNum = parseInt(selection.numbers);
+                if (!isNaN(parsedNum) && parsedNum > 1) {
+                    itemsCount = parsedNum; 
+                    break;
+                }
+            }
+
+            if (itemsCount === 0) {
+                let titleNumbers = productTitle.replace(/[^0-9]/g, '');
+                itemsCount = parseInt(titleNumbers) || 25; 
+            }
+
+            let totalPanels = Math.floor(itemsCount / 3); 
+            let pricePerClip = (nowPrice / itemsCount).toFixed(2);
+            
+            $('#display-total-sqft').text(`Covers ${totalPanels} Panels`);
+            $('#display-price-per-ft').text(`$${pricePerClip} Per Clip`);
+
+        } else {
+            let totalCoverage = 0;
+            if (rawSqftData.includes('|')) {
+                let dataMap = {};
+                let isNumericMap = true; 
+                rawSqftData.split('|').forEach(item => {
+                    let parts = item.split(':');
+                    if (parts.length === 2) {
+                        let mapKey = normalizeKeyText(parts[0]);
+                        dataMap[mapKey] = parseFloat(parts[1]);
+                        if (/[a-z]/i.test(mapKey)) {
+                            isNumericMap = false;
+                        }
+                    }
+                });
+
+                for (let selection of currentSelections) {
+                    if (dataMap[selection.full]) {
+                        totalCoverage = dataMap[selection.full];
+                        break;
+                    } 
+                    if (selection.numbers && dataMap[selection.numbers]) {
+                        totalCoverage = dataMap[selection.numbers];
+                        break;
+                    }
+                }
+
+                if (!totalCoverage) {
+                    for (let selection of currentSelections) {
+                        if (isNumericMap && !selection.numbers) {
+                            continue; 
+                        }
+
+                        let found = false;
+                        for (let key in dataMap) {
+                            if (selection.full !== "" && (selection.full.includes(key) || key.includes(selection.full))) {
+                                totalCoverage = dataMap[key];
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found) break;
+                    }
+                }
+            } else {
+                totalCoverage = parseFloat(rawSqftData) || 0;
+            }
+
+            if (!totalCoverage || totalCoverage <= 0) { 
+                $('#custom-pricing-logic').hide(); 
+                return; 
+            }
+
+            let finalUnitLabel = "Piece"; 
+            let selectionTextsCombined = "";
+            
+            $('input[name^="attribute"]:checked').each(function() {
+                selectionTextsCombined += " " + $(this).next().text().trim().toLowerCase();
+            });
+            $('select[name^="attribute"] option:selected').each(function() {
+                selectionTextsCombined += " " + $(this).text().trim().toLowerCase();
+            });
+
+            let completeSearchString = globalSearchScope + " " + selectionTextsCombined;
+            let hasRollWord = /\brolls?\b/i.test(completeSearchString);
+            
+            if (hasPackIncludesField) {
+                finalUnitLabel = "Pack"; 
+            } else if (completeSearchString.indexOf('kit') !== -1) {
+                finalUnitLabel = "Kit"; 
+            } else if (completeSearchString.indexOf('pack') !== -1) {
+                finalUnitLabel = "Pack";
+            } else if (hasPackOption && packSelected && !packText.includes('single') && !packText.includes('1 pack')) {
+                finalUnitLabel = "Pack";
+            } else {
+                if (hasRollWord) {
+                    finalUnitLabel = "Roll";
+                } else if (globalSearchScope.indexOf('molding') !== -1 || globalSearchScope.indexOf('moulding') !== -1) {
+                    finalUnitLabel = "Molding";
+                } else if (globalSearchScope.indexOf('panel') !== -1) {
+                    finalUnitLabel = "Panel";
+                } else if (globalSearchScope.indexOf('skin') !== -1) {
+                    finalUnitLabel = "Skin";
+                } else if (globalSearchScope.indexOf('beam') !== -1) {
+                    finalUnitLabel = "Beam";
+                } else if (globalSearchScope.indexOf('plank') !== -1) {
+                    finalUnitLabel = "Plank";
+                } else if (globalSearchScope.indexOf('tile') !== -1) {
+                    finalUnitLabel = "Tile";
+                } else {
+                    finalUnitLabel = "Piece"; 
+                }
+            }
+
+            let nowPerUnitFt = (nowPrice / totalCoverage).toFixed(2);
+            let displayUnit = finalUnitLabel.charAt(0).toUpperCase() + finalUnitLabel.slice(1);
+            let dynamicFtSuffix = isLinearFt ? "ln.ft." : "Sq.Ft";
+            
+            $('#display-price-per-ft').text(`$${nowPerUnitFt} per ${dynamicFtSuffix}`);
+            $('#display-total-sqft').text(`| ${totalCoverage} ${dynamicFtSuffix} Per ${displayUnit}`);
+        }
+
+        // DOM Positioning logic
+       /* priceElem.css({'display': 'flex', 'align-items': 'center', 'flex-wrap': 'wrap'});
+            if ($("#custom-pricing-logic").parent()[0] !== priceElem[0]) {
+                $("#custom-pricing-logic").appendTo(priceElem);
+            }*/
+        $('#custom-pricing-logic').show().css('display', 'flex');
+    }
+
+    $(document).ready(function() {
+        /*if ($('#custom-pricing-logic').length === 0) {
+                $('.price-section--withoutTax').first().append('<div id="custom-pricing-logic" style="display:none; font-size:16px; margin-left:15px; font-weight:bold; color: #333;"></div>');
+        }*/
+
+        setTimeout(calculateFinalPricing, 600);
+        setTimeout(calculateFinalPricing, 1500); 
+
+        const priceTarget = document.querySelector('.productView-price'); 
+        if (priceTarget) {
+            const observer = new MutationObserver(() => setTimeout(calculateFinalPricing, 300));
+            observer.observe(priceTarget, { childList: true, characterData: true, subtree: true });
+        }
+
+        $(document).on('change click', 'input[name^="attribute"]', function() {
+            setTimeout(calculateFinalPricing, 400);
+        });
+
+        $(document).on('change', 'select[name^="attribute"]', function() {
+            setTimeout(calculateFinalPricing, 400);
+        });
+    });
+})(jQuery);
+
+(function($) {
+    function displaydiscount() {
+        let rawdiscnt = ''; 
+
+        $('.productView-info-name').each(function() {
+            let prname = $(this).text().trim().toLowerCase();
+            if (prname.indexOf('discount_value') !== -1) {
+                rawdiscnt = $(this).next('.productView-info-value').text().trim();
+                //$(this).closest('.single-infoValue').hide(); 
+                this.closest('.single-infoValue').style.setProperty('display', 'none', 'important');
+            }
+        });
+
+        if (!rawdiscnt) {
+            $('.frame').hide();
+            return; 
+        }
+
+        let $badgeFrame = $('.frame');
+         $badgeFrame.show().css({
+                'display': 'flex'
+            });
+       
+    }
+
+    $(document).ready(function() {
+        setTimeout(displaydiscount, 500); 
+    });
+})(jQuery);
+
+</script>
+
+<!------- Price label was,now,from replace on the empty --------------->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const priceSections = document.querySelectorAll('.price-section, .productView-price');
+        
+        priceSections.forEach(section => {
+            function removeLabels(node) {
+                node.childNodes.forEach(child => {
+                    if (child.nodeType === Node.TEXT_NODE) {
+                        child.nodeValue = child.nodeValue
+                            .replace(/Was:/gi, '')
+                            .replace(/Now:/gi, '')
+                            .replace(/From:/gi, '');
+                    } else if (child.nodeType === Node.ELEMENT_NODE) {
+                        removeLabels(child);
+                    }
+                });
+            }
+            removeLabels(section);
+        });
+    });
+</script>
+
+<!-- Simple Script to Handle Popup Injection -->
+<script>
+function openVideoModal(videoId) {
+    // Remove existing lightbox if any
+    const existingOverlay = document.getElementById('custom-video-lightbox');
+    if (existingOverlay) {
+        existingOverlay.remove();
+    }
+
+    // Create a clean overlay popup dynamically
+    const overlay = document.createElement('div');
+    overlay.id = 'custom-video-lightbox';
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999999; display: flex; align-items: center; justify-content: center;';
+    
+    overlay.innerHTML = `
+        <div style="position: relative; width: 80%; max-width: 800px; aspect-ratio: 16/9; background: #000;">
+            <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+            <button onclick="document.getElementById('custom-video-lightbox').remove()" style="position: absolute; top: -40px; right: 0; background: #fff; border: none; font-size: 20px; font-weight: bold; padding: 5px 10px; cursor: pointer; border-radius: 3px;">&times; Close</button>
+        </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Close on clicking outside the video box
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            overlay.remove();
+        }
+    });
+}
+</script>
+
+
+<!---Calc Script Start --->
+<script>
+ $(document).ready(function() {
+    // Auto-detect and show relevant calculator based on product category
+    var categoriesText = $('#product-category-list').attr('data-categories') || '';
+    
+    $('.category-calc-box').each(function() {
+        var allowedCats = $(this).attr('data-cat').split(',');
+        var showThisBox = false;
+        
+        for (var i = 0; i < allowedCats.length; i++) {
+            if (categoriesText.indexOf(allowedCats[i].trim()) !== -1) {
+                showThisBox = true;
+                break;
+            }
+        }
+        
+        if (showThisBox) {
+            $(this).show();
+        }
+    });
+
+    // Open Main Calculator Popup
+    $('#trigger-calculator').on('click', function(e) {
+        e.preventDefault();
+        $('#project-calculator-modal').css('display', 'flex');
+    });
+
+    // Close Popup
+    $('.calculator-close-btn').on('click', function() {
+        $('#project-calculator-modal').hide();
+    });
+
+    // Close when clicking outside content
+    $('#project-calculator-modal').on('click', function(e) {
+        if ($(e.target).is('#project-calculator-modal')) {
+            $(this).hide();
+        }
+    });
+
+    // Individual Accordion/Slide toggles
+    $('.slide_open').on('click', function() { $('#slide').slideToggle(); });
+    $('.slide1_open').on('click', function() { $('#slide1').slideToggle(); });
+    $('.slide2_open').on('click', function() { $('#slide2').slideToggle(); });
+    $('.slide3_open').on('click', function() { $('#slide3').slideToggle(); });
+
+    // Calculations logic
+    $('#calc_ceiling_btn').on('click', function(e) {
+        e.preventDefault();
+        var l = parseFloat($('#ceiling_length').val()) || 0;
+        var w = parseFloat($('#ceiling_width').val()) || 0;
+        if(l > 0 && w > 0) {
+            var sqft = l * w;
+            var total = Math.ceil((sqft * 1.1) / 2.69);
+            $('#ceiling_result').html('<span style="color:green;">Required: ' + total + ' Tiles (' + sqft.toFixed(2) + ' sq.ft with 10% waste)</span>');
+        } else {
+            $('#ceiling_result').html('<span style="color:red;">Enter valid numbers</span>');
+        }
+    });
+
+    $('#calc_molding_btn').on('click', function(e) {
+        e.preventDefault();
+        var lf = parseFloat($('#molding_linear_feet').val()) || 0;
+        if(lf > 0) {
+            var total = Math.ceil((lf * 1.1) / 6.5);
+            $('#molding_result').html('<span style="color:green;">Required: ' + total + ' pieces</span>');
+        } else {
+            $('#molding_result').html('<span style="color:red;">Enter valid length</span>');
+        }
+    });
+
+    $('#calc_panel_btn').on('click', function(e) {
+        e.preventDefault();
+        var h = parseFloat($('#panel_height').val()) || 0;
+        var w = parseFloat($('#panel_width').val()) || 0;
+        if(h > 0 && w > 0) {
+            var sqft = h * w;
+            var total = Math.ceil((sqft * 1.1) / 2.0);
+            $('#panel_result').html('<span style="color:green;">Required: ' + total + ' Panels</span>');
+        } else {
+            $('#panel_result').html('<span style="color:red;">Enter valid dimensions</span>');
+        }
+    });
+
+    $('#calc_foam_btn').on('click', function(e) {
+        e.preventDefault();
+        var l = parseFloat($('#foam_length').val()) || 0;
+        var w = parseFloat($('#foam_width').val()) || 0;
+        if(l > 0 && w > 0) {
+            var sqft = l * w;
+            var total = Math.ceil((sqft * 1.1) / 1.0);
+            $('#foam_result').html('<span style="color:green;">Required: ' + total + ' Planks</span>');
+        } else {
+            $('#foam_result').html('<span style="color:red;">Enter valid measurements</span>');
+        }
+    });
+});
+</script>

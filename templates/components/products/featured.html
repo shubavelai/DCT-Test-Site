@@ -1,0 +1,12 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+<div class="section-spacing sectionLoad">
+    <div class="container">
+        <h2 class="page-heading d-flex justify-content-between">
+            {{lang 'products.featured' }}
+            <a href="{{theme_settings.featrued_view_all_link}}" class="category_viewall">{{lang 'common.viewall' }}</a>
+        </h2>
+
+        {{> components/products/featured-carousel products=products show_compare=products.show_compare theme_settings=theme_settings}}
+
+    </div>
+</div>

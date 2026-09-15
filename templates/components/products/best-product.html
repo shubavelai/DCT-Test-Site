@@ -1,0 +1,13 @@
+<div class="product-list-wrap">
+    <h3 class="block-heading">{{theme_settings.block_heading_1}}</h3>
+
+    <ul class="productGrid productGrid--maxCol{{ columns }} productListItems" data-product-type="top_sellers" data-list-name="Most Popular Products">
+    {{#each products}}
+        {{#if @index '<' 4}}
+            <li class="product">
+                {{>components/products/card-new settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+            </li>
+        {{/if}}
+    {{/each}}
+    </ul>
+</div>

@@ -1,0 +1,182 @@
+{{#if theme_settings.homepage_category_show}}
+    {{#if theme_settings.theme_health}}
+    <div class="section-spacing sectionLoad">
+        <div class="cate-bg container category_wrapper">
+            <div class="category-head myheadeing">
+                <h2 class="page-heading d-flex justify-content-between">
+                {{lang 'common.cate' }}
+                <!-- <p>{{theme_settings.subheading-category}}</p> -->
+                <!-- <span class="head-line"></span> -->
+                <a href="{{theme_settings.category_view_all_link}}" class="category_viewall">{{lang 'common.viewall' }}</a>
+                </h2>
+            </div>
+            <div class="homecategory row cate-row pre-row">
+                <div class="all-cate caro-btn topsp col-12 pre-col all-head-contant">
+                        <div class="homecate sliderWrap">
+                            <section class="productCarousel home_category"
+                                data-list-name="{{list}}"
+                                data-slick='{
+                                "rows": 2,
+                                "infinite": false,
+                                "mobileFirst": true,
+                                "dots": false,
+                                "slidesToShow": 2,
+                                "slidesToScroll": 1,
+                                "prevArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-prev-arrow-cate",
+                                "nextArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-next-arrow-cate",
+                                "responsive": [
+                                    {
+                                        "breakpoint": 1409,
+                                        "settings": {
+                                            "slidesToShow": 3,
+                                            "slidesToScroll": 1
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 991,
+                                        "settings": {
+                                            "slidesToShow": 3,
+                                            "slidesToScroll": 1
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 575,
+                                        "settings": {
+                                            "slidesToShow": 2,
+                                            "slidesToScroll": 1
+                                        }
+                                    }
+                                ]
+                                }'
+                                > 
+                                {{#each categories }}
+                                    {{!-- Target Category 2437 --}}
+                                    {{#if id '==' 2437}}
+                                        {{!-- Loop through its subcategories (children) --}}
+                                        {{#each children}}
+                                            <div data-product-slide class="home-cate-item col-12 pre-col productCarousel-slide new-productt js-product-slide">
+                                                <div class="catebg">
+                                                    <div class="cate-img d-flex">
+                                                        <a class="categoryImage" href="{{url}}"><img src="{{getImage image}}" alt="Category-image" width="800px" height="800px"></a>
+                                                        <div class="cate-ti text-left">
+                                                            <a class="catename d-inline-block" href="{{url}}">{{name}}</a>
+                                                            <p>{{count}}<span>{{lang 'items'}}</span></p>
+                                                            <a href="{{url}}" class="link cate--button">Shop Now</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    {{/if}}
+                                {{/each}}
+                            </section>
+                            <div class="all-btn new-productt">
+                                <button class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-prev-arrow-cate slick-prev slick-arrow"><svg width="32px" height="18px"><use xlink:href="#arrow-left"></use></svg></button>
+                                <button class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-next-arrow-cate slick-next slick-arrow"><svg width="32px" height="18px"><use xlink:href="#arrow-right"></use></svg></button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ else }}
+    <div class="section-spacing sectionLoad">
+        <div class="cate-bg container category_wrapper">
+            <div class="category-head myheadeing">
+                <h2 class="page-heading d-flex justify-content-between">
+                {{lang 'common.cate' }}
+                <!-- <p>{{theme_settings.subheading-category}}</p> -->
+                <!-- <span class="head-line"></span> -->
+                <a href="{{theme_settings.category_view_all_link}}" class="category_viewall">{{lang 'common.viewall' }}</a>
+                </h2>
+            </div>
+            <div class="homecategory row cate-row pre-row">
+                <div class="all-cate caro-btn topsp col-12 pre-col all-head-contant">
+                        <div class="homecate sliderWrap">
+                            <section class="productCarousel home_category"
+                                data-list-name="{{list}}"
+                                data-slick='{
+                                "infinite": false,
+                                "mobileFirst": true,
+                                "dots": false,
+                                "slidesToShow": 5,
+                                "slidesToScroll": 2,
+                                "prevArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-prev-arrow-cate",
+                                "nextArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-next-arrow-cate",
+                                "responsive": [
+                                    {
+                                        "breakpoint": 1409,
+                                        "settings": {
+                                            "slidesToShow": 7,
+                                            "slidesToScroll": 1
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 1199,
+                                        "settings": {
+                                            "slidesToShow": 5,
+                                            "slidesToScroll": 1
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 800,
+                                        "settings": {
+                                            "slidesToShow": 4,
+                                            "slidesToScroll": 2
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 575,
+                                        "settings": {
+                                            "slidesToShow": 3,
+                                            "slidesToScroll": 1
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 419,
+                                        "settings": {
+                                            "slidesToShow": 2,
+                                            "slidesToScroll": 1
+                                        }
+                                    },
+                                    {
+                                        "breakpoint": 0,
+                                        "settings": {
+                                            "slidesToShow": 2,
+                                            "slidesToScroll": 1
+                                        }
+                                    }
+                                ]
+                                }'
+                                > 
+                                {{#each categories }}
+                                    {{!-- Target Category 2437 --}}
+                                    {{#if id '==' 2437}}
+                                        {{!-- Loop through its subcategories (children) --}}
+                                        {{#each children}}
+                                            <div data-product-slide class="home-cate-item col-12 pre-col productCarousel-slide new-productt js-product-slide">
+                                                <div class="catebg">
+                                                    <div class="cate-img">
+                                                        <a class="category_image" href="{{url}}"><img src="{{getImage image}}" alt="Category-image" width="800px" height="800px"></a>
+                                                        <div class="cate-ti text-center">
+                                                            <a class="catename d-inline-block" href="{{url}}">{{name}}</a>
+                                                            <!-- <p>{{count}}<span>{{lang 'items'}}</span></p> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{/each}}
+                                    {{/if}}
+                                {{/each}}
+                            </section>
+                            <div class="all-btn new-productt">
+                                <button class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-prev-arrow-cate slick-prev slick-arrow"><svg width="32px" height="18px"><use xlink:href="#arrow-left"></use></svg></button>
+                                <button class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-next-arrow-cate slick-next slick-arrow"><svg width="32px" height="18px"><use xlink:href="#arrow-right"></use></svg></button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+{{/if}}

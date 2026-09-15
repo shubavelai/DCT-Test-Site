@@ -1,0 +1,34 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+{{#if category.products}}
+    <div class="row cate-border pre-row">
+        <div class="col-md-6 col-9 pre-col actionbar-filter">
+        {{> components/products/filter sort=pagination.category.sort}}
+        </div>
+        <div class="col-md-6 col-3 pre-col category-grid text-right">
+            <div class="category-grid-icon">
+                <span id="gridProduct" class="active" title="Grid"><svg width="20px" height="20px"><use xlink:href="#cgrid"></use></svg></span>
+                <span id="listProduct" title="List"><svg width="20px" height="20px"><use xlink:href="#clist"></use></svg></span>
+            </div>
+        </div>        
+    </div>
+    <div data-list-name="Category: {{category.name}}" role="region" aria-label="{{lang 'category.product_label'}}">
+    
+            {{> components/products/grid products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" }}
+        
+    </div>
+
+    {{> components/common/paginator pagination.category}}
+{{else}}
+    {{#if category.search_error}}
+        <p>{{lang 'search.errorMessage'}}</p>
+    {{else}}
+        <p data-no-products-notification
+           role="alert"
+           aria-live="assertive"
+           tabindex="-1"
+        >
+            {{lang 'categories.no_products'}}
+        </p>
+    {{/if}}
+{{/if}}

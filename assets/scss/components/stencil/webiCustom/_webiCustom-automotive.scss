@@ -1,0 +1,436 @@
+.theme_automotive {
+    .navPages-container.is-open{
+        top: 52px;
+    }
+    .heroCarousel-content{
+        left: 0%;
+        width: 50%;
+    }
+    // Common Css
+    .section-spacing .container {
+        overflow: hidden;
+    }
+    .slideshow-img-banner {
+        height: 100%;
+    }
+    .page-heading {
+        margin-bottom: 1rem;
+    }
+    // slider arrows 
+    .section-spacing .all-btn, .related--products .all-btn {
+        margin: 0;
+    }
+    .section-spacing button.slick-arrow, 
+    .related--products button.slick-arrow {
+        position: absolute;
+        margin: 0rem;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+        height: 40px;
+        width: 50px;
+        background: stencilColor("button--primary-backgroundColor");
+        border-color: stencilColor("button--primary-backgroundColor");
+        transition: 0.4s linear left, 0.4s linear right;
+        svg {
+            fill: stencilColor("button--primary-color");
+        }
+        &:hover {
+            background: stencilColor("button--primary-backgroundColorHover");
+            border-color: stencilColor("button--primary-backgroundColorHover");
+            svg {
+                fill: stencilColor("button--primary-colorHover");
+            }
+        }
+    }
+    .section-spacing button.slick-prev,
+    .related--products button.slick-prev {
+        left: -20%;
+    }
+    .section-spacing button.slick-next,
+    .related--products button.slick-next {
+        right: -20%;
+    }
+    .sliderWrap {
+        &:hover {
+            .all-btn {
+                button.slick-prev {
+                    left: 23px;
+                }
+                button.slick-next {
+                    right: 23px;
+                }
+            }
+        }
+    }
+    // Header css
+    .navPages-container {
+        background-color: transparent;
+        border-top: container(border);
+        border-bottom: container(border);
+    }
+    // Best Sell Products
+    .sell-best-product {
+        .row.pre-row {
+            margin-left: -10px;
+            margin-right: -10px;
+            .pre-col {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+    }
+    .sell-product-list {
+        .product-list-wrap {
+            background-color: transparent;
+            padding: 0;
+            .block-heading {
+                margin-bottom: 0;
+                background-color: stencilColor("color-whitesBase");
+                padding: 15px 20px;
+            }
+        }
+        .productGrid {
+            margin: 0;
+            border: container(border);
+            border-top: 0;
+            .product {
+                width: 100%;
+                margin-bottom: 0px;
+                padding: 20px 10px;
+                border-bottom: container(border);
+                height: auto !important;
+                // box-shadow: 0px 3px 7px 2px stencilColor("color-whitesBase");
+                .card--item {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    height: 100%;
+                    flex-direction: unset;
+                    .card-figure {
+                        width: 100px;
+                    }
+                    .card-body {
+                        width: 100%;
+                        max-width: calc(100% - 100px);
+                        padding-top: 0;
+                        padding-left: 15px;
+                        display: unset;
+                        .card-detail {
+                            margin-bottom: 5px;
+                        }
+                        .card-title {
+                            margin-bottom: 0.7rem;
+                            a {
+                                text-align: left;
+                            }
+                        }
+                        .card-text.card--price {
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+                &:last-child {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+    // Category section
+    .home-cate-item {
+        .cate-ti {
+            a {
+                margin-top: 0;
+                background-color: stencilColor("color-whitesBase");
+                padding: 10px 0;
+            }
+        }
+    }
+    // Logobar section
+    .logobar-bg {
+        background-color: transparent;
+        padding: 0;
+    }
+    // products card
+
+    .card-figcaption {
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, 0%);
+        top: 50%;
+        bottom: auto;
+        transition: 0.5s ease;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .card {
+        &:hover {
+            .card-figcaption {
+                opacity: 1;
+                visibility: visible;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    // Testimonial section
+    .testi-box {
+        padding: 25px;
+        text-align: left !important;
+    }
+    .author-detail {
+        margin-top: 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 0.8rem;
+        .testi-detail {
+            margin: 0;
+        }
+    }
+    // Footer 
+    .footer-body {
+        padding: 50px 0;
+    }
+    .footer-info-col {
+        .subscription-form-wrap, 
+        .footer-logo {
+            p {
+                opacity: 1;
+                line-height: 19px;
+            }
+        }
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        .footer-contact-info {
+            address, strong {
+                font-size: 15px;
+                font-weight: 400;
+                opacity: 1;
+                line-height: 19px;
+                font-style: normal;
+                margin-bottom: 0.6rem;
+            }
+        }
+        .footer-info-list {
+            margin-bottom: 0;
+        }
+        .subscription-form-wrap form.form .subscription-action .button:hover {
+            background-color: stencilColor("button--primary-backgroundColorHover");
+            color: stencilColor("button--primary-colorHover");
+        }
+    }
+    .footer-info-list a {
+        font-weight: 400;
+    }
+    .footer-bottom {
+        border-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+    .heroCarouselRow .heroCarouselRight {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+@media screen and (max-width: 991px) and (min-width: 768px) {
+    .theme_automotive {
+        .sell-product-list {
+            .productGrid {
+                .product {
+                    // padding: 10px;
+                    .card--item {
+                        .card-figure {
+                            width: 70px;
+                        }
+                        .card-body {
+                            max-width: calc(100% - 70px);
+                            padding-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 992px) {
+    .theme_automotive {
+        // Product page
+        .productView-images {
+            .productImage-sticky {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                .productView-image {
+                    width: 80%;
+                    margin: unset;
+                    order: 2;
+                }
+                .productView-thumbnails {
+                    width: 20%;
+                    min-width: auto;
+                    margin: 0;
+                    padding-right: 1rem;
+                    .productView-thumbnail {
+                        width: 100%;
+                    }
+                    .slick-list {
+                        margin: 0;
+                    }
+                    .slick-track {
+                        display: block;
+                    }
+                }
+                button.slick-prev.slick-arrow {
+                    left: 50%;
+                    right: auto;
+                    transform: translateX(-50%) rotate(90deg);
+                    top: -60px;
+                }
+                button.slick-next.slick-arrow {
+                    left: 50%;
+                    right: auto;
+                    transform: translateX(-50%) rotate(90deg);
+                    bottom: -60px;
+                    top: auto;
+                }
+            }
+        }
+        
+    }
+}
+@media screen and (min-width: 801px) {
+    .theme_automotive {
+        .footer-info-col {
+            width: 21%;
+        }
+        .footer-info-col--small {
+            width: 18%;
+        }
+        article.footer-contact-info {
+            width: 25%;
+        }
+    }
+}
+@media screen and (max-width: 1024px) {
+    .theme_automotive .productView-images .productImage-sticky .productView-thumbnails {
+        padding-right: 0.5rem;
+    }
+    .theme_automotive {
+        .previewCart {
+            .productView {
+                max-width: calc(70% - 7px);
+            }
+            .previewCartCheckout {
+                max-width: calc(30% - 7px);
+            }
+        }
+    }
+}
+@media screen and (max-width: 991px) {
+    .theme_automotive {
+        .previewCart {
+            row-gap: 1rem;
+            .productView {
+                max-width: 100%;
+                .productView-details {
+                    padding-left: 1rem;
+                    padding-bottom: 0;
+                }
+            }
+            .previewCartCheckout {
+                max-width: 100%;
+                order: 2;
+                .cartPreviewButton {
+                    display: flex;
+                    flex-wrap: wrap;
+                    column-gap: 14px;
+                    .button {
+                        flex: 0 0 50%;
+                        max-width: calc(50% - 7px);
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 800px) {
+    .theme_automotive {
+        article.footer-brand-info{
+            padding-bottom: 0rem;
+        }
+        .mainNavbar.logo--center {
+            .header-brand-logo {
+                flex: 0 0 100%;
+                max-width: calc(100% - 126px);
+                justify-content: flex-start;
+            }
+            .header-quick-search {
+                max-width: fit-content;
+                padding: 0px 0 0;
+                height: 22px;
+            }
+            .navUser-section {
+                max-width: fit-content;
+            }            
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .theme_automotive {
+        .modal-header-title {
+            font-size: 18px;
+            line-height: normal;
+            letter-spacing: 0;
+        }
+        .modal-body {
+            padding: 1.25rem 1.25rem;
+        }
+        .previewCart {
+            .previewCartCheckout {
+                .cartPreviewButton {
+                    row-gap: 1rem;
+                    .button {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                    }
+                }
+                .previewCartCheckout-additionalCheckoutButtons {
+                    .CheckoutButton {
+                        .or-use-label {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .productView {
+                .productView-title {
+                    font-size: 16px;
+                }
+                .productView-details {
+                    .productView-price {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 480px) {
+    .theme_automotive {
+        .previewCart {
+            .productView {
+                flex-wrap: wrap;
+                .productView-image {
+                    max-width: 100%;
+                }
+                .productView-details {
+                    max-width: 100%;
+                    padding: 0;
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,462 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        limit: {{theme_settings.homepage_blog_posts_count}}
+---
+{{#partial "hero"}}
+    {{{region name="home_below_menu"}}}
+    {{#and carousel carousel.slides.length}}
+        {{> components/carousel arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}}
+    {{/and}}
+    {{{region name="home_below_carousel"}}}
+{{/partial}}
+
+{{#partial "page"}}
+
+    {{#each shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+ 
+
+{{#if theme_settings.theme_electronics}}
+{{> components/common/home-cate}}
+ <div class="main full">
+                <div class="container">
+                    <div class="text-center">
+                        <img class="img-fluid center-block timg lazyload" data-sizes="auto" data-src="/product_images/uploaded_images/tolstoy-video-image.png" />
+                    </div>
+                </div>
+            </div>
+            <!--Category Card Styles start-->
+            <div class="container my-4 dct-grid-wrapper">
+                <div class="row">
+                    <!-- CARD 1 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Real or Faux Tin Ceiling Tiles</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-left">
+                                    <a href="/tin-ceiling-tiles/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116"/>
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Tin Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-left">
+                                    <a href="/faux-tin-ceiling-decor/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Tin Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-left mt-2">
+                                    <a href="/styrofoam-ceiling-tiles-20x20/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Styrofoam Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-left mt-2">
+                                    <a href="/ceiling-tile-samples/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Samples</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="/ceiling-tiles/" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- CARD 2 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Ceiling Tile By Installation Method</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Drop In</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Glue Up</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Nail Up</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Peel and Stick</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="/ceiling-tiles/" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- CARD 3 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Decorative Beams</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Wood Beams</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Wood Planks</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Wood Trusses</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Quick-ship Beams</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="#" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- CARD 4 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Ceiling & Flooring Solutions</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Buy in Bulk</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Economy Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Flooring</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Ceiling Planks</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="#" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            <!--Category Card Styles end-->
+
+    {{{region name="home_above_featured_products"}}}
+    {{#if products.featured}}
+        {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_featured_products"}}}
+
+    {{> components/cms/image-with-text}}
+
+    {{> components/cms/best-sell-product}}
+
+    {{{region name="home_above_top_products"}}}
+    {{#if products.top_sellers}}
+        {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_top_products"}}}
+
+    {{> components/cms/offerbanner}}
+
+    {{{region name="home_above_new_products"}}}
+    {{#if products.new}}
+        {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_new_products"}}}
+
+    {{> components/cms/logo-bar}}
+    {{> components/cms/testimonial}}
+    {{> components/cms/home-contact}}
+
+    {{#if blog.recent_posts}}
+        {{> components/blog/newblog blog=blog.recent_posts}}
+    {{/if}}
+
+    {{> components/cms/newsletter}}
+</div>
+{{else}} 
+ {{#if theme_settings.theme_automotive}}
+    <div class="main full">
+
+{{> components/common/home-cate}}
+     <div class="main full">
+                <div class="container">
+                    <div class="text-center">
+                        <img class="img-fluid center-block timg lazyload" data-sizes="auto" data-src="/product_images/uploaded_images/tolstoy-video-image.png" />
+                    </div>
+                </div>
+            </div>
+            <!--Category Card Styles start-->
+            <div class="container my-4 dct-grid-wrapper">
+                <div class="row">
+                    <!-- CARD 1 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Real or Faux Tin Ceiling Tiles</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-left">
+                                    <a href="/tin-ceiling-tiles/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116"/>
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Tin Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-left">
+                                    <a href="/faux-tin-ceiling-decor/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Tin Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-left mt-2">
+                                    <a href="/styrofoam-ceiling-tiles-20x20/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Styrofoam Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-left mt-2">
+                                    <a href="/ceiling-tile-samples/" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Samples</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="/ceiling-tiles/" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- CARD 2 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Ceiling Tile By Installation Method</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Drop In</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Glue Up</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Nail Up</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Peel and Stick</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="/ceiling-tiles/" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- CARD 3 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Decorative Beams</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Wood Beams</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Wood Planks</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Faux Wood Trusses</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Quick-ship Beams</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="#" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- CARD 4 -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 p-3 shadow-sm border-0 dct-cat-card" style="background: #fff;">
+                            <h3 class="h5 font-weight-bold mb-3" style="font-size: 18px; color: #111;">Ceiling & Flooring Solutions</h3>
+                            <div class="row no-gutters">
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/tin-ceiling-tiles.jpg" alt="Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Buy in Bulk</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/faux-tin-ceiling-tiles.jpg" alt="Faux Tin Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Economy Tiles</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/styrofoam-tiles.jpg" alt="Styrofoam Tiles" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Flooring</span>
+                                    </a>
+                                </div>
+                                <div class="col-6 p-1 text-center mt-2">
+                                    <a href="#" class="text-decoration-none color-inherit">
+                                        <img src="/product_images/uploaded_images/samples-ceiling-tiles-2.jpg" alt="Samples" class="img-fluid rounded mb-1 dct-grid-img" width="186" height="116" />
+                                        <span class="d-block text-truncate text-dark" style="font-size: 12px;">Ceiling Planks</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="#" class="text-primary font-weight-bold text-decoration-none" style="font-size: 13px;">See more</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            <!--Category Card Styles end-->   
+    {{{region name="home_above_featured_products"}}}
+    {{#if products.featured}}
+        {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_featured_products"}}}
+
+    {{> components/cms/image-with-text}}
+
+    {{> components/cms/best-sell-product}}
+
+    {{> components/cms/offerbanner}}
+
+    {{{region name="home_above_new_products"}}}
+    {{#if products.new}}
+        {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_new_products"}}}
+
+    {{> components/cms/testimonial}}
+
+    {{{region name="home_above_top_products"}}}
+    {{#if products.top_sellers}}
+        {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_top_products"}}}
+
+    {{> components/cms/home-contact}}
+
+    {{#if blog.recent_posts}}
+        {{> components/blog/newblog blog=blog.recent_posts}}
+    {{/if}}
+    <!-- Logo bar placed after Recent Posts -->
+    {{> components/cms/logo-bar}}
+    {{> components/cms/newsletter}}
+</div>
+{{else}}
+{{#if theme_settings.theme_health}}
+    <div class="main full">
+    {{> components/common/home-cate}}
+    {{{region name="home_below_featured_products"}}}
+    {{#if products.featured}}
+        {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_featured_products"}}}
+
+    {{> components/cms/image-with-text}}
+
+    {{{region name="home_below_top_products"}}}
+    {{#if products.top_sellers}}
+        {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_top_products"}}}
+
+    {{> components/cms/offerbanner}}
+
+    {{{region name="home_below_new_products"}}}
+    {{#if products.new}}
+        {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+    {{/if}}
+    {{{region name="home_below_new_products"}}}
+
+    {{> components/cms/logo-bar}}
+    {{> components/cms/testimonial}}
+    {{> components/cms/home-contact}}
+
+    {{#if blog.recent_posts}}
+        {{> components/blog/newblog blog=blog.recent_posts}}
+    {{/if}}
+
+    {{> components/cms/newsletter}}
+
+</div>
+{{/if}}  
+{{/if}}
+{{/if}}
+
+{{/partial}}
+{{> layout/base}}

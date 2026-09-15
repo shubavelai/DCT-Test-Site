@@ -1,0 +1,34 @@
+{{#if theme_settings.show-image-with-text}}
+<div class="section-spacing sectionLoad image-with-text-wrapper">
+    <div class="container">
+        <div class="image-with-text-main">
+            <div class="image-text-row d-flex">
+                <div class="imageWrapper">
+                    <img class="img-fluid lazyload" data-sizes="auto" data-src="/product_images/uploaded_images/{{theme_settings.section_image}}" width="1920px" height="550px" alt="banner"/>
+                </div>
+                <div class="content_wrapper">
+                    <div class="content-inner">
+                        <h4>{{theme_settings.content_title}}</h4>
+                        <p>{{theme_settings.content}}{{theme_settings.content_1}}{{theme_settings.content_2}}</p>
+                        <a href="{{theme_settings.section_button_link}}" class="button button--primary">{{theme_settings.section_button_text}}</a>
+                    </div>
+                </div>
+            </div>
+            {{#if theme_settings.section_image1}}
+            <div class="image-text-row d-flex">
+                <div class="imageWrapper">
+                    <img class="img-fluid lazyload" data-sizes="auto" data-src="/product_images/uploaded_images/{{theme_settings.section_image1}}" width="1920px" height="550px" alt="banner"/>
+                </div>
+                <div class="content_wrapper">
+                    <div class="content-inner">
+                        <h4>{{theme_settings.content_title1}}</h4>
+                        <p>{{theme_settings.content1}}{{theme_settings.content_11}}{{theme_settings.content_21}}</p>
+                        <a href="{{theme_settings.section_button_link1}}" class="button button--primary">{{theme_settings.section_button_text1}}</a>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/if}}

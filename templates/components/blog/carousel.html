@@ -1,0 +1,97 @@
+<div class="sliderWrap">
+<section class="productCarousel row"
+    data-slick='{
+    "dots": false,
+    "infinite": false,
+    "autoplay": false,
+    "mobileFirst": true,
+    "slidesToShow": 4,
+    "slidesToScroll": 1,
+    "slide": ".js-product-slide",
+    "prevArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-prev-arrow-blog",
+    "nextArrow": "{{#if customArrowClass}}.{{customArrowClass}}{{/if}}.js-product-next-arrow-blog",
+    "responsive": [
+        {
+            "breakpoint": 1409,
+            "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 3
+            }
+        },
+        {
+            "breakpoint": 1199,
+            "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 3
+            }
+        },
+        {
+            "breakpoint": 991,
+            "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 3
+            }
+        },
+        {
+            "breakpoint": 767,
+            "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 2
+            }
+        },
+        {
+            "breakpoint": 599,
+            "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 2
+            }
+        },
+        {
+            "breakpoint": 0,
+            "settings": {
+                "slidesToScroll": 1,
+                "slidesToShow": 1
+            }
+        }
+    ]
+    }'
+    >
+    {{#each blog}}
+    <div class="productCarousel-slide js-product-slide col-12 blog_webi">
+        {{#if thumbnail}}
+        <div class="main-b-b">
+            <div class="blogshadow">
+                <div class="blog-left">
+                    <div class="webi-blog-image text-center">
+                        <a href="{{url}}" title="blog">
+                        <img src="{{getImage thumbnail 'blog_size'}}" alt="{{thumbnail.alt}}" width="1000px" height="1000px" title="{{thumbnail.alt}}">
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-right text-left">
+                    <div class="bs">
+                        <div class="blog-date-author d-flex justify-content-between">
+                            <p class="blog-date">{{author}}</p>
+                            <div class="date-time">{{date_published}}</div>
+                        </div>
+                        <h3><a href="{{url}}">{{title}}</a></h3>
+                        <div class="blog-summary">
+                            <p>{{summary}}</p>
+                        </div>
+                        <div class="read-more-blog">
+                            <a class="readmore_link button button--primary" title="all blog" href="{{url}}">{{lang 'common.readmore'}}</a>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+</section>
+<div class="all-btn recent-post blog_webi">
+    <button class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-prev-arrow-blog slick-prev slick-arrow"><svg width="32px" height="18px"><use xlink:href="#arrow-left"></use></svg></button>
+
+    <button class="{{#if customArrowClass}}{{customArrowClass}} {{/if}}js-product-next-arrow-blog slick-next slick-arrow"><svg width="32px" height="18px"><use xlink:href="#arrow-right"></use></svg></button>
+</div>
+</div>

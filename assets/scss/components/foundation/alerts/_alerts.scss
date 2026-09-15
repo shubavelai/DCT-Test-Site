@@ -1,0 +1,36 @@
+// =============================================================================
+// ALERTS
+// =============================================================================
+
+.alertBox {
+    border-radius: $alert-radius;
+    color: stencilColor("alert-color");
+    // background-color: #fdd;
+    .icon {
+        svg {
+            fill: #cc4749;
+        }
+    }
+}
+
+.alertBox-icon {
+    .icon {
+        @include square(25px);
+    }
+}
+
+.alertBox--info {
+    background-color: stencilColor("banner--default-backgroundColor");
+    color: stencilColor("alert-color-alt");
+
+    .alertBox-close {
+        svg {
+            fill: $color-infoLight;
+        }
+    }
+}
+.alertBox--success {
+    svg{
+        fill: stencilColor("color-success")!important;
+    }
+}

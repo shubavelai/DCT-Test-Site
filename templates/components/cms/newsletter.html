@@ -1,0 +1,14 @@
+{{#if theme_settings.show_home_newsletter}}
+<div class="section-spacing sectionLoad newsletter_wrapper">
+    <div class="newsletter-bg">
+        <div class="container">
+            <div class="newsletterBox">
+                <h3>{{theme_settings.newsletter_title}}</h3>
+                {{#if settings.show_newsletter_box}}
+                    {{> components/common/subscription-form}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}

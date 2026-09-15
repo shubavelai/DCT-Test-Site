@@ -1,0 +1,88 @@
+// =============================================================================
+// LOGIN (CSS)
+// =============================================================================
+
+
+
+.login-row {
+    @include grid-row();
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    @include breakpoint("medium") {
+        // margin-top: spacing("double")*2;
+    }
+}
+
+.login-row-wrapper {
+    // @include grid-column(12);
+    flex: 0 0 50%;
+    width: 100%;
+    // padding-left: 0.75rem;
+    // padding-right: 0.75rem;
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+}
+
+.login-form {
+    @include grid-column(12);
+    padding: 20px 30px;
+    margin: 0;
+
+    // @include breakpoint("medium") {
+    //     @include grid-column(6);
+
+    //     margin-top: spacing("double");
+    // }
+}
+
+.new-customer {
+    @include grid-column(12);
+    @include breakpoint("medium") {
+        @include grid-column(6);
+    }
+}
+
+.new-customer-intro {
+    margin-bottom: 0;
+}
+
+.new-customer-fact-list {
+    margin-left: spacing("double");
+}
+
+.new-customer-fact {
+    padding-left: spacing("half");
+}
+
+.panel {
+    background-color: #f0f0f0;
+}
+.panel-header, .panel-body {
+    background-color: transparent;
+    margin: 0;
+}
+.form-actions {
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .login-wrapper {
+        .login-row {
+            row-gap: 1.5rem;
+            .login-row-wrapper {
+                flex: 0 0 100%;
+                max-width: 100%;
+                .login-form form {
+                    .form-actions {
+                        flex-wrap: wrap;
+                    }
+                }
+            }
+            .new-customer {
+                padding: 0;
+            }
+        }
+    }
+}

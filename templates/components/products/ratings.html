@@ -1,0 +1,19 @@
+
+
+
+<!-- <div class="comments_note wb-list-product-reviews">
+<span class="avg-rate bg-re3 d-flex justify-content-center">
+    <span class="rate-tot winter-count">0</span>
+    <svg width="11px" height="11px"><use xlink:href="#reviewStar"></use></svg>    
+</span>
+</div> -->
+
+
+<div class="comments_note wb-list-product-reviews">
+    <span class="avg-rate bg-re3 d-flex justify-content-center">
+        <span class="rate-tot winter-count">0</span><svg width="12px" height="12px" class="cardStar"><use xlink:href="#reviewStar"></use></svg>
+        <span class="or-rate winter-review">
+            {{#for 1 5}}{{#if ../this.rating '>=' $index}}<span data-review="{{../this.rating}}" class="icon icon--ratingFull winter-review-count"><svg width="12px" height="12px"><use xlink:href="#reviewStar"></use></svg></span>{{else}}<span class="icon icon--ratingEmpty"><svg width="12px" height="12px"><use xlink:href="#reviewStarEmpty"></use></svg></span>{{/if}}{{/for}}{{{snippet 'product_rating'}}}
+        </span>
+    </span>
+</div>

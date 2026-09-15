@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{{ head.favicon }}}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script nonce="{{nonce}}"> 
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+        <script nonce="{{nonce}}">window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
+
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script nonce="{{nonce}}">
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script nonce="{{nonce}}" async src="{{cdn 'assets/dist/theme-bundle.head_async.js' resourceHint='preload' as='script'}}"></script>
+        
+        {{getFontsCollection font-display='block'}}
+        
+        <script nonce="{{nonce}}" async src="{{cdn 'assets/dist/theme-bundle.font.js' resourceHint='preload' as='script'}}"></script>
+
+        {{{stylesheet '/assets/css/theme.css'}}}
+
+        {{{head.scripts}}}
+
+        {{~inject 'zoomSize' theme_settings.zoom_size}}
+        {{~inject 'productSize' theme_settings.product_size}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'template' template}}
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
+        {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
+        {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
+        {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+        {{~inject 'giftWrappingRemoveMessage' (lang 'cart.gift_wrapping.remove_confirm')}}
+        {{~inject 'graphql_token' settings.storefront_api.token}}
+        {{~inject 'currency_selector' currency_selector}}
+
+        {{~inject 'show_card_swatch' theme_settings.show_card_swatch}}
+        {{~inject 'show_card_stock' theme_settings.show_card_stock}}
+        {{~inject 'show_quick_add_to_cart' theme_settings.show_quick_add_to_cart}}
+
+        <script src="{{cdn 'assets/custom/jquery-3.6.3.min.js'}}"></script>
+        <script src="{{cdn 'assets/custom/custom.js'}}"></script>
+    </head>
+    <body class="home {{theme_settings.theme_variations}}">
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+        <svg style="display:none;">
+            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg" id="shipping-truck">
+                <path d="M12.1429 10.4286H5.91352M12.1429 10.4286V4M12.1429 10.4286H13.2293M2.94363 10.4286H2C1.44772 10.4286 1 9.98086 1 9.42857V2C1 1.44772 1.44772 1 2 1H11.1429C11.6951 1 12.1429 1.44772 12.1429 2V4M12.1429 4H15.5714L18.1429 7V10.4286H16.1992M6.14286 11.2857C6.14286 12.2325 5.37535 13 4.42857 13C3.4818 13 2.71429 12.2325 2.71429 11.2857C2.71429 10.3389 3.4818 9.57143 4.42857 9.57143C5.37535 9.57143 6.14286 10.3389 6.14286 11.2857ZM16.4286 11.2857C16.4286 12.2325 15.6611 13 14.7143 13C13.7675 13 13 12.2325 13 11.2857C13 10.3389 13.7675 9.57143 14.7143 9.57143C15.6611 9.57143 16.4286 10.3389 16.4286 11.2857Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="contact_call">
+                <path d="M1.56415 4.94718C2.90109 9.5054 6.4946 13.0989 11.0528 14.4358C13.1727 15.0576 15 13.2091 15 11V10.75C15 10.1977 14.5508 9.75602 14.0021 9.69372C13.2343 9.60656 12.4967 9.42004 11.8024 9.14733L10.473 10.4767C8.31089 9.44199 6.55801 7.68912 5.5233 5.52696L6.85267 4.19759C6.57996 3.50328 6.39344 2.76567 6.30628 1.99791C6.24398 1.44916 5.80229 1 5.25 1H5C2.79086 1 0.942397 2.82735 1.56415 4.94718Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg" id="cuser">
+                <path d="M18.7778 21C18.7778 17.9318 14.7981 15.4444 9.88889 15.4444C4.97969 15.4444 1 17.9318 1 21M9.88889 12.1111C6.82064 12.1111 4.33333 9.6238 4.33333 6.55556C4.33333 3.48731 6.82064 1 9.88889 1C12.9571 1 15.4444 3.48731 15.4444 6.55556C15.4444 9.6238 12.9571 12.1111 9.88889 12.1111Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" id="cart">
+                <path d="M7 9.75V6C7 3.23858 9.23858 1 12 1C14.7614 1 17 3.23858 17 6V9.75M2 7.25H22L20.9567 18.7263C20.8396 20.014 19.76 21 18.467 21H5.53304C4.24003 21 3.16037 20.014 3.0433 18.7263L2 7.25Z" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+
+            <svg width="129" height="20" viewBox="0 0 129 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="review_star">
+                <path d="M5.6351 19.021C5.03008 19.3869 4.28263 18.8455 4.4416 18.1566L5.61443 13.0736C5.68094 12.7854 5.58297 12.484 5.35971 12.2899L1.42356 8.86886C0.890531 8.40558 1.17544 7.52929 1.879 7.46806L7.07954 7.0155C7.37507 6.98978 7.63211 6.80264 7.74735 6.52929L9.76283 1.74856C10.0378 1.09627 10.9622 1.09627 11.2372 1.74856L13.2526 6.52929C13.3679 6.80264 13.6249 6.98978 13.9205 7.0155L19.121 7.46806C19.8246 7.52929 20.1095 8.40558 19.5764 8.86886L15.6403 12.2899C15.417 12.484 15.3191 12.7854 15.3856 13.0736L16.5584 18.1566C16.7174 18.8455 15.9699 19.3869 15.3649 19.021L10.914 16.3293C10.6595 16.1754 10.3405 16.1754 10.086 16.3293L5.6351 19.021Z" fill="#F6C11F"/>
+                <path d="M32.6351 19.021C32.0301 19.3869 31.2826 18.8455 31.4416 18.1566L32.6144 13.0736C32.6809 12.7854 32.583 12.484 32.3597 12.2899L28.4236 8.86886C27.8905 8.40558 28.1754 7.52929 28.879 7.46806L34.0795 7.0155C34.3751 6.98978 34.6321 6.80264 34.7474 6.52929L36.7628 1.74856C37.0378 1.09627 37.9622 1.09627 38.2372 1.74856L40.2526 6.52929C40.3679 6.80264 40.6249 6.98978 40.9205 7.0155L46.121 7.46806C46.8246 7.52929 47.1095 8.40558 46.5764 8.86886L42.6403 12.2899C42.417 12.484 42.3191 12.7854 42.3856 13.0736L43.5584 18.1566C43.7174 18.8455 42.9699 19.3869 42.3649 19.021L37.914 16.3293C37.6595 16.1754 37.3405 16.1754 37.086 16.3293L32.6351 19.021Z" fill="#F6C11F"/>
+                <path d="M59.6351 19.021C59.0301 19.3869 58.2826 18.8455 58.4416 18.1566L59.6144 13.0736C59.6809 12.7854 59.583 12.484 59.3597 12.2899L55.4236 8.86886C54.8905 8.40558 55.1754 7.52929 55.879 7.46806L61.0795 7.0155C61.3751 6.98978 61.6321 6.80264 61.7474 6.52929L63.7628 1.74856C64.0378 1.09627 64.9622 1.09627 65.2372 1.74856L67.2526 6.52929C67.3679 6.80264 67.6249 6.98978 67.9205 7.0155L73.121 7.46806C73.8246 7.52929 74.1095 8.40558 73.5764 8.86886L69.6403 12.2899C69.417 12.484 69.3191 12.7854 69.3856 13.0736L70.5584 18.1566C70.7174 18.8455 69.9699 19.3869 69.3649 19.021L64.914 16.3293C64.6595 16.1754 64.3405 16.1754 64.086 16.3293L59.6351 19.021Z" fill="#F6C11F"/>
+                <path d="M86.6351 19.021C86.0301 19.3869 85.2826 18.8455 85.4416 18.1566L86.6144 13.0736C86.6809 12.7854 86.583 12.484 86.3597 12.2899L82.4236 8.86886C81.8905 8.40558 82.1754 7.52929 82.879 7.46806L88.0795 7.0155C88.3751 6.98978 88.6321 6.80264 88.7474 6.52929L90.7628 1.74856C91.0378 1.09627 91.9622 1.09627 92.2372 1.74856L94.2526 6.52929C94.3679 6.80264 94.6249 6.98978 94.9205 7.0155L100.121 7.46806C100.825 7.52929 101.109 8.40558 100.576 8.86886L96.6403 12.2899C96.417 12.484 96.3191 12.7854 96.3856 13.0736L97.5584 18.1566C97.7174 18.8455 96.9699 19.3869 96.3649 19.021L91.914 16.3293C91.6595 16.1754 91.3405 16.1754 91.086 16.3293L86.6351 19.021Z" fill="#F6C11F"/>
+                <path d="M113.635 19.021C113.03 19.3869 112.283 18.8455 112.442 18.1566L113.614 13.0736C113.681 12.7854 113.583 12.484 113.36 12.2899L109.424 8.86886C108.891 8.40558 109.175 7.52929 109.879 7.46806L115.08 7.0155C115.375 6.98978 115.632 6.80264 115.747 6.52929L117.763 1.74856C118.038 1.09627 118.962 1.09627 119.237 1.74856L121.253 6.52929C121.368 6.80264 121.625 6.98978 121.92 7.0155L127.121 7.46806C127.825 7.52929 128.109 8.40558 127.576 8.86886L123.64 12.2899C123.417 12.484 123.319 12.7854 123.386 13.0736L124.558 18.1566C124.717 18.8455 123.97 19.3869 123.365 19.021L118.914 16.3293C118.659 16.1754 118.341 16.1754 118.086 16.3293L113.635 19.021Z" fill="#F6C11F"/>
+            </svg>
+
+            <svg width="33" height="18" viewBox="0 0 33 18" xmlns="http://www.w3.org/2000/svg" id="arrow-left">
+                <path d="M9.27638 0L10.7018 1.46177L4.35885 7.96639H32.5V10.0337H4.35885L10.7018 16.5382L9.27638 18L0.500002 8.99997L9.27638 0Z"/>
+            </svg>
+
+            <svg width="33" height="18" viewBox="0 0 33 18" xmlns="http://www.w3.org/2000/svg" id="arrow-right">
+                <path d="M23.7236 0L22.2982 1.46177L28.6412 7.96639H0.5V10.0337H28.6412L22.2982 16.5382L23.7236 18L32.5 8.99997L23.7236 0Z"/>
+            </svg>
+
+            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="contact_message">
+                <path d="M13.6703 14.098L12.4165 13.095L12.4073 13.0879C12.1459 12.8788 12.014 12.7732 11.8669 12.6981C11.7348 12.6306 11.5941 12.5815 11.4488 12.5517C11.2851 12.5181 11.1146 12.5181 10.7723 12.5181H3.63027C2.71053 12.5181 2.25013 12.5181 1.8985 12.3389C1.58889 12.1812 1.33702 11.9292 1.17927 11.6196C1.0001 11.268 1.0001 10.8081 1.0001 9.88833V3.63017C1.0001 2.71043 1.0001 2.24988 1.17927 1.89824C1.33702 1.58863 1.5894 1.3371 1.89901 1.17934C2.25099 1 2.71112 1 3.63265 1H13.1762C14.0977 1 14.5589 1 14.9108 1.17934C15.2204 1.3371 15.472 1.58863 15.6297 1.89824C15.8091 2.25022 15.8091 2.71133 15.8091 3.63287V13.0703C15.8091 13.9471 15.8091 14.3854 15.6294 14.6105C15.473 14.8064 15.2361 14.9203 14.9856 14.92C14.6975 14.9197 14.355 14.6457 13.6703 14.098Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg" id="address">
+                <path d="M1 7.24165C1 11.6161 4.82682 15.2335 6.52067 16.6204C6.76309 16.8189 6.88575 16.9193 7.06661 16.9703C7.20744 17.0099 7.4147 17.0099 7.55553 16.9703C7.73673 16.9192 7.85853 16.8198 8.10187 16.6206C9.79572 15.2336 13.6223 11.6165 13.6223 7.24205C13.6223 5.58661 12.9574 3.99877 11.7739 2.8282C10.5903 1.65762 8.98511 1 7.31128 1C5.63744 1 4.03209 1.65772 2.84851 2.82829C1.66493 3.99887 1 5.58621 1 7.24165Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5.508 6.4096C5.508 7.40548 6.31532 8.2128 7.3112 8.2128C8.30708 8.2128 9.1144 7.40548 9.1144 6.4096C9.1144 5.41372 8.30708 4.6064 7.3112 4.6064C6.31532 4.6064 5.508 5.41372 5.508 6.4096Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="message_send">
+                <g clip-path="url(#clip0_2099_2044)">
+                <path d="M7.29199 14.6768V18.5418C7.29199 18.8118 7.46533 19.0509 7.72199 19.1359C7.78616 19.1568 7.85199 19.1668 7.91699 19.1668C8.11199 19.1668 8.30033 19.0751 8.42033 18.9118L10.6812 15.8351L7.29199 14.6768Z" fill="black"/>
+                <path d="M19.7375 0.115907C19.5459 -0.0199262 19.2942 -0.0382595 19.0859 0.0709072L0.33587 9.86257C0.114204 9.97841 -0.0166296 10.2151 0.00170373 10.4642C0.0208704 10.7142 0.186704 10.9276 0.422537 11.0084L5.63504 12.7901L16.7359 3.29841L8.14587 13.6476L16.8817 16.6334C16.9467 16.6551 17.015 16.6667 17.0834 16.6667C17.1967 16.6667 17.3092 16.6359 17.4084 16.5759C17.5667 16.4792 17.6742 16.3167 17.7017 16.1342L19.9934 0.717574C20.0275 0.484241 19.9292 0.252574 19.7375 0.115907Z" fill="black"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_2099_2044">
+                <rect width="20" height="20" fill="white"/>
+                </clipPath>
+                </defs>
+            </svg>
+
+            <!-- search icon -->
+            <svg width="22" height="22" viewBox="0 0 22 22"  xmlns="http://www.w3.org/2000/svg" id="mysearch">
+                <path d="M15.7825 15.7826L20.9999 21"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.26087 17.5217C13.8232 17.5217 17.5217 13.8232 17.5217 9.26087C17.5217 4.69852 13.8232 1 9.26087 1C4.69852 1 1 4.69852 1 9.26087C1 13.8232 4.69852 17.5217 9.26087 17.5217Z"  stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg" id="AddToCart">
+                <path d="M5 8.5V5.5C5 3.29086 6.79086 1.5 9 1.5C11.2091 1.5 13 3.29086 13 5.5V8.5M1 6.5H17L16.1654 15.6811C16.0717 16.7112 15.208 17.5 14.1736 17.5H3.82643C2.79202 17.5 1.92829 16.7112 1.83464 15.6811L1 6.5Z" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" id="quick_view">
+                <path d="M12.55 7C12.55 8.42016 11.4083 9.57143 10 9.57143C8.59167 9.57143 7.45 8.42016 7.45 7C7.45 5.57984 8.59167 4.42857 10 4.42857C11.4083 4.42857 12.55 5.57984 12.55 7Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1.5 7C2.86012 3.48798 6.03563 1 10 1C13.9644 1 17.1399 3.48798 18.5 7C17.1399 10.512 13.9644 13 10 13C6.03563 13 2.86012 10.512 1.5 7Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" id="compare-product">
+                <path d="M8.7 2.6H3.5C2.39543 2.6 1.5 3.49543 1.5 4.6V13.4C1.5 14.5046 2.39543 15.4 3.5 15.4H8.7M11.9 2.6H12.3C13.4046 2.6 14.3 3.49543 14.3 4.6V5M14.3 13V13.4C14.3 14.5046 13.4046 15.4 12.3 15.4H11.9M14.3 8.2V9.8M7.9 1V17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg" id="gift">
+                <path d="M2.05263 10.4737V18.8947C2.05263 20.0574 2.99519 21 4.15789 21H16.7895C17.9522 21 18.8947 20.0574 18.8947 18.8947V10.4737M10.4737 6.26316V4.68421M10.4737 6.26316H6.78947C5.33609 6.26316 4.15789 5.08496 4.15789 3.63158C4.15789 2.1782 5.33609 1 6.78947 1C8.82421 1 10.4737 2.64948 10.4737 4.68421M10.4737 6.26316H14.1579C15.6113 6.26316 16.7895 5.08496 16.7895 3.63158C16.7895 2.1782 15.6113 1 14.1579 1C12.1232 1 10.4737 2.64948 10.4737 4.68421M10.4737 10.4737V21M1 6.26316H19.9474V10.4737H1V6.26316Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <svg viewBox="0 0 341.333 341.333" id="cgrid">
+                <rect x="128" y="128" width="85.333" height="85.333"></rect>
+                <rect x="0" y="0" width="85.333" height="85.333"></rect>
+                <rect x="128" y="256" width="85.333" height="85.333"></rect>
+                <rect x="0" y="128" width="85.333" height="85.333"></rect>
+                <rect x="0" y="256" width="85.333" height="85.333"></rect>
+                <rect x="256" y="0" width="85.333" height="85.333"></rect>
+                <rect x="128" y="0" width="85.333" height="85.333"></rect>
+                <rect x="256" y="128" width="85.333" height="85.333"></rect>
+                <rect x="256" y="256" width="85.333" height="85.333"></rect>
+            </svg>
+            <svg viewBox="0 0 95.494 95.494" id="clist">
+                <circle cx="10.906" cy="17.294" r="10.906"></circle>
+                <circle cx="10.906" cy="47.294" r="10.906"></circle>
+                <circle cx="10.906" cy="78.2" r="10.906"></circle>
+                <path d="M34.258,24.43h59.236c0.529,0,1.039-0.211,1.414-0.586s0.586-0.884,0.586-1.414l-0.002-10.271c0-1.104-0.896-2-2-2
+                  H34.258c-1.104,0-2,0.896-2,2V22.43C32.258,23.534,33.153,24.43,34.258,24.43z"></path>
+                <path d="M93.492,40.158H34.258c-1.104,0-2,0.896-2,2v10.271c0,1.104,0.896,2,2,2h59.236c0.529,0,1.039-0.211,1.414-0.586
+                  s0.586-0.885,0.586-1.414l-0.002-10.271C95.492,41.054,94.598,40.158,93.492,40.158z"></path>
+                <path d="M93.492,71.064H34.258c-1.104,0-2,0.896-2,2v10.271c0,1.104,0.896,2,2,2h59.236c0.529,0,1.039-0.211,1.414-0.586
+                  s0.586-0.885,0.586-1.414l-0.002-10.271C95.492,71.96,94.598,71.064,93.492,71.064z"></path>
+            </svg>
+
+            <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" id="reviewStar">
+                <path d="M3.30924 11.356C2.93387 11.5943 2.45743 11.2608 2.55286 10.8266L3.20803 7.84516C3.24638 7.67066 3.1887 7.48896 3.05673 7.36852L0.837279 5.34305C0.516281 5.05011 0.696055 4.51535 1.12883 4.4758L4.01545 4.21204C4.20239 4.19496 4.36401 4.07461 4.43395 3.90041L5.536 1.15563C5.70394 0.737362 6.29606 0.737362 6.464 1.15563L7.56605 3.90041C7.63599 4.07461 7.79761 4.19496 7.98455 4.21204L10.8712 4.4758C11.3039 4.51535 11.4837 5.05011 11.1627 5.34305L8.94327 7.36852C8.8113 7.48896 8.75362 7.67066 8.79197 7.84516L9.44714 10.8266C9.54257 11.2608 9.06613 11.5943 8.69076 11.356L6.26802 9.81756C6.10444 9.71369 5.89556 9.71368 5.73198 9.81756L3.30924 11.356Z"/>
+            </svg>
+
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="reviewStarEmpty">
+                <path d="M3.30924 11.356C2.93387 11.5943 2.45743 11.2608 2.55286 10.8266L3.20803 7.84516C3.24638 7.67066 3.1887 7.48896 3.05673 7.36852L0.837279 5.34305C0.516281 5.05011 0.696055 4.51535 1.12883 4.4758L4.01545 4.21204C4.20239 4.19496 4.36401 4.07461 4.43395 3.90041L5.536 1.15563C5.70394 0.737362 6.29606 0.737362 6.464 1.15563L7.56605 3.90041C7.63599 4.07461 7.79761 4.19496 7.98455 4.21204L10.8712 4.4758C11.3039 4.51535 11.4837 5.05011 11.1627 5.34305L8.94327 7.36852C8.8113 7.48896 8.75362 7.67066 8.79197 7.84516L9.44714 10.8266C9.54257 11.2608 9.06613 11.5943 8.69076 11.356L6.26802 9.81756C6.10444 9.71369 5.89556 9.71368 5.73198 9.81756L3.30924 11.356Z" stroke="black"/>
+            </svg>
+
+            <svg width="11" height="7" viewBox="0 0 11 7" xmlns="http://www.w3.org/2000/svg" id="downArrow">
+                <path d="M1.2002 1.5L5.2002 5.5L9.2002 1.5" stroke="" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+            </svg>
+
+        </svg>
+
+        {{> components/common/header }}
+        {{> components/common/body }}
+        {{> components/common/footer }}
+
+        <script nonce="{{nonce}}">window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script nonce="{{nonce}}">
+            {{!-- Exported in app.js --}}
+            function onThemeBundleMain() {
+                window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+
+                function browserSupportsFormData() {
+                    return typeof FormData !== 'undefined' 
+                        && !!FormData.prototype.keys;
+                }
+                function loadFormDataPolyfillScript(src) {
+                    var formDataPolyfillScript = document.createElement('script');
+                    formDataPolyfillScript.src = src;
+                    formDataPolyfillScript.onerror = function () {
+                        console.error('Failed to load formData polyfill script ' + src);
+                    };
+                    document.body.appendChild(formDataPolyfillScript);
+                }
+
+                if (!browserSupportsFormData()) {
+                    loadFormDataPolyfillScript('{{cdn 'assets/dist/theme-bundle.polyfill_form_data.js'}}');
+                }
+            }
+        </script>
+        <script id="theme-bundle-main" nonce="{{nonce}}" async defer src="{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}"></script>
+        <script nonce="{{nonce}}">
+            const scriptElement = document.getElementById('theme-bundle-main');
+
+            if (scriptElement) {
+                addEventListener('load', onThemeBundleMain);
+            } else {
+                console.error('Could not find script element with id "theme-bundle-main"');
+            }
+        </script>
+
+        {{{footer.scripts}}}
+
+        <div id="product-add-popup" class="product-add-popup compare-popup" hidden>
+            <div class="popup-section">
+                <a href="javascript:void(0)" onclick='$(".compare-popup").hide();' class="close-btn" role="button">x</a>
+                <h5>Compare</h5>
+                <p>Item Successfully added to comparison list.</p>
+            </div>
+        </div>
+        <div id="product-remove-popup" class="product-remove-popup compare-popup" hidden>
+            <div class="popup-section">
+                <a href="javascript:void(0)" onclick='$(".compare-popup").hide();' class="close-btn" role="button">x</a>
+                <h5>Compare</h5>
+                <p>Item Successfully removed from comparison list.</p>
+            </div>
+        </div>
+
+        <button id="backToTop" class="top_button button button--primary" title="Go to top">↑</button>
+    </body>
+</html>

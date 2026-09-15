@@ -1,0 +1,63 @@
+// =============================================================================
+// PRODUCT Sale Badges (CSS)
+// =============================================================================
+
+@mixin setFlagColors($badge-color, $text-color) {
+    background: stencilColor($badge-color);
+    color: stencilColor($text-color);
+}
+
+// -----------------------------------------------------------------------------
+// SASH BADGE
+// -----------------------------------------------------------------------------
+
+.productBadges{
+    z-index: 1;
+    position: absolute;
+    text-transform: capitalize;
+    font-size: 12px;
+    border-radius: 4px;
+    margin: 0px 0 0 0;
+    top: 10px;
+    font-weight: 400;
+    left: 10px;
+    .hidden{
+        display: none;
+    }
+    .sale-flag-sash{
+        z-index: 1;
+        text-transform: capitalize;
+        font-size: 12px;
+        padding: 2px 7px;
+        margin: 0 0 4px 0px;
+        background: stencilColor("color_badge_product_sale_badges");
+        color: stencilColor("color_text_product_sale_badges");
+    }
+    .sale-flag-sash-percentage{
+        .wb-sale-text-wrap {            
+            z-index: 1;
+            text-transform: capitalize;
+            font-size: 12px;
+            padding: 2px 7px;
+            margin: 0 0 4px 0px;
+            background: stencilColor("color_badge_product_sale_perecentage_badges");
+            color: stencilColor("color_text_badge_product_sale_perecentage_badges");
+        }
+    }
+    .sold-out-flag-sash{
+        z-index: 1;
+        text-transform: capitalize;
+        font-size: 12px;
+        padding: 2px 7px;
+        margin: 0;
+        background: stencilColor("color_badge_product_sold_out_badges");
+        color: stencilColor("color_text_product_sold_out_badges");
+    }
+}
+
+
+@media(max-width: 600px){
+    .sale-flag-sash, .sale-flag-sash-percentage, .sold-out-flag-sash{
+        font-size: 10px!important;
+    }
+}

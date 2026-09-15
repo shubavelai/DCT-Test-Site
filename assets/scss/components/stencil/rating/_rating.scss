@@ -1,0 +1,155 @@
+// =============================================================================
+// RATING (CSS)
+// =============================================================================
+
+.icon--ratingEmpty {
+    svg {
+        fill: stencilColor("icon-ratingEmpty");
+    }
+}
+
+.icon--ratingFull {
+    svg {
+        fill: stencilColor("icon-ratingFull");
+    }
+}
+
+
+// Small rating
+// -----------------------------------------------------------------------------
+//
+// 1. Vertically aligns stars to container. Icons are off by default.
+//    Icons are all vertically aligned to middle, however middle is not middle,
+//    and therefore need to be adjusted to actually sit at middle.
+//
+// -----------------------------------------------------------------------------
+
+.rating--small {
+    cursor: pointer;
+
+    .icon {
+        @include square(14px);
+        margin-top: 0px; // 1
+        display: inline-table;
+    }
+}
+article .comments_note {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+}
+.productList article .comments_note {
+    right: 10px;
+}
+article .comments_note+p {
+    display: none;
+}
+article .wb-list-product-reviews .avg-rate {
+    width: 51px;
+    overflow: hidden;
+    height: 24px;
+    text-align: center;
+    display: inline-block;
+    align-items: center;
+    gap: 0.2rem;
+    .or-rate.winter-review {
+        display: none;
+    }
+}
+.wb-list-product-reviews .avg-rate, article .emstar, article .or-rate {
+    transition: .2s ease;
+}
+article .avg-rate {
+    display: inline-block;
+    background-color: stencilColor("card-review-background");
+    color: stencilColor("card-review-color");
+    border-radius: 0;
+    cursor: pointer;
+    svg.cardStar {
+        stroke: stencilColor("card-review-color");
+    }
+}
+article .avg-rate span {
+    display: inline-block;
+    margin-top: 0px !important;
+    top: 0;
+    line-height: normal;
+}
+article .rate-tot {
+    margin: 0 0px;
+    display: inline-block;
+    font-size: 14px;
+    position: relative;
+    top: -2px;
+}
+article .fa.fa-star.emstar {
+    position: relative;
+    top: -1px;
+}
+article .wb-list-product-reviews .or-rate {
+    opacity: 0;
+    transform: scale(0);
+    width: 0;
+}
+article .avg-rate span {
+    display: inline-block;
+    margin-top: -9px;
+}
+// article .wb-list-product-reviews .avg-rate:hover {
+//     width: 110px;
+// }
+article .thumbnail-container .variant-links .js-count.count, article .wb-list-product-reviews:hover .emstar {
+    display: none;
+    transform: scale(0);
+}
+
+.facetedSearch-content--rating {
+    a.navList-action {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        .avg-rate {
+            .cardStar {
+                display: none;
+            }
+            .winter-review {
+                display: flex;
+                align-items: center;
+                .icon {
+                    display: flex;
+                    align-items: center;
+                }
+                .rate-tot.winter-count {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.productView-rating{
+    .winter-count{
+        display: none;
+    }
+}
+@media(max-width: 800px){
+    article .comments_note{
+        top: 2px;
+        right: 2px;
+    }
+    article .wb-list-product-reviews .avg-rate{
+        height: 20px;
+        width: 40px;
+    }
+    article .rate-tot{
+        font-size: 12px;
+        top: -4px;
+    }
+    .avg-rate i{
+        font-size: 12px;
+    }
+    article .fa.fa-star.emstar{
+        top: -3px;
+    }
+}

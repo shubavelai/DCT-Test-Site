@@ -1,0 +1,24 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+
+<div class="row cate-border pre-row">
+        <div class="col-md-6 col-9 pre-col actionbar-filter">
+        {{> components/products/filter sort=pagination.brand.sort}}
+        </div>
+        <div class="col-md-6 col-3 pre-col category-grid text-right">
+            <div class="category-grid-icon">
+                <span id="gridProduct" class="active" title="Grid"><svg width="20px" height="20px"><use xlink:href="#cgrid"></use></svg></span>
+                <span id="listProduct" title="List"><svg width="20px" height="20px"><use xlink:href="#clist"></use></svg></span>
+            </div>
+        </div>        
+    </div>
+<div class="xs-filter"></div>
+<div data-list-name="Brand: {{brand.name}}">
+    {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+        {{> components/products/grid products=brand.products show_compare=brand.show_compare theme_settings=theme_settings event="list"}}
+    {{else}}
+        {{> components/products/list products=brand.products show_compare=brand.show_compare theme_settings=theme_settings event="list"}}
+    {{/if}}
+</div>
+
+{{> components/common/paginator pagination.brand}}

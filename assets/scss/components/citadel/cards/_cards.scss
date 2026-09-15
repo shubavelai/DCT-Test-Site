@@ -1,0 +1,612 @@
+// =============================================================================
+// CARDS (CSS)
+// =============================================================================
+//
+// 1. Allow users to click the anchor tag on the image in the figcaption empty
+//    space. This provides a much larger and simpler hit state for navigating
+//    to the product details page. (Does not work in IE10 or earlier).
+// 2. Using translate3d to counter a chrome specific bug: When using a masonry
+//    styled layout via CSS column-count etc, transforms applied to descendants
+//    are made invisible, except for 3d transforms...
+//
+// -----------------------------------------------------------------------------
+// .card-product-size:empty{
+//     margin: 0;
+// }
+.card-product-swatch, .card-product-size{
+    display: block;
+    width: 100%;
+    clear: both;
+    margin: 0px 0 12px;
+    .custom-swatch-form-field {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        .color-pattern{
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, .18%);
+            width: 18px!important;
+            height: 18px!important;
+        }
+        .color-3, .color-2{
+            border-radius: 10%!important;
+        }
+        .option-swatch{
+            width: 24px;
+            height: 24px;
+            margin: 0 2px 0 0;
+            border: 1px solid transparent;
+            border-radius: 0;
+            overflow: hidden;
+            display: flex;
+            transition: all 0.4s;
+            padding: 2px;
+            label{
+                width: 100%;
+                height: 100%;
+                display: block;
+                font-size: 0;
+                cursor: pointer;
+                background-color: #ccc;
+                border-radius: 0;
+            }
+            &.color-2{
+                label{
+                    border-radius: 0;
+                    width: 50%;
+                }
+            }
+            &.color-3{
+                label{
+                    border-radius: 0;
+                    width: 33.33%;
+                }
+            }
+            &.active, &:hover{
+                border-color:#000;
+            }
+        }
+        + .custom-swatch-form-field{
+            margin-top: 10px;
+        }
+    }
+    .custom-size-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        align-items: center;
+        gap: 0.5rem;
+        .size-option {
+        border: container("border");
+        font-size: 13px;
+        font-weight: 400;
+            &.active, &:hover{
+                border-color:#000;
+            }
+        }
+    }
+}
+.card {
+    &:focus-within {
+        .card-figcaption {
+            opacity: 1;
+        }
+    }
+
+    &.focus-within {
+        .card-figcaption {
+            opacity: 1;
+        }
+    }
+}
+
+.card-figure {
+    margin-top: $card-figure-marginTop;
+    overflow: initial;
+    padding: 0px;
+    position: relative;
+
+    &__link {
+        display: block;
+        position: relative;
+    }
+    .card-figcaption-button {
+        background-color: stencilColor("button--primary-backgroundColor");
+        padding: 0;
+        height: 34px;
+        width: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            background-color: stencilColor("button--primary-backgroundColorHover");
+            svg {
+                stroke: stencilColor("button--primary-colorHover");
+            }
+        }
+        &:has(input:checked) {
+            background-color: stencilColor("button--primary-backgroundColorHover");
+            svg {
+                stroke: stencilColor("button--primary-colorHover");
+            }
+        }
+    }
+}
+
+.card-img-container {
+
+    @include lazy-loaded-padding("productgallery_size");
+    max-width: get-width(stencilString("productgallery_size"));
+}
+.card-img-container:after {
+    padding-bottom: 100% !important;
+}
+
+.card-figcaption {
+    // display: none;
+    margin: $card-figcaption-margin;
+    pointer-events: none; // 1
+    opacity: 1;
+    top: auto;
+    height: auto;
+    left: auto;
+    right: 12px;
+    bottom: 12px;
+
+    // @include breakpoint("medium") {
+    //     display: block;
+    // }
+    @media screen and (max-width: 800px) {
+        right: 5px;
+        bottom: 5px;
+    }
+}
+
+.card-figcaption-body {
+    // display: $card-figcaption-body-display;
+    pointer-events: all; // 1
+    // transform: translate3d(0, -50%, 0); // 2
+    position: unset;
+    transform: unset;
+    display: flex;
+    align-items: center;
+    column-gap: 0.4rem;
+}
+
+.card-image {
+    @include lazy-loaded-img;
+    border: 0;
+    /* Object-fit polyfill */
+    font-family: "object-fit: contain;";
+    max-height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+.card-figure .second-img {
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    border-radius: 10px;
+    max-height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 100%
+}
+
+.featured-imag:hover .second-img {
+    opacity: 1
+}
+
+.card-title {
+    font-size: 17px;
+    margin: $card-title-margin;
+    > a {
+        color: $card-title-color;
+        display: block;
+        text-decoration: $card-title-textDecoration;
+        line-height: normal;
+        letter-spacing: 0;
+
+        &:hover {
+            color: $card-title-color-hover;
+        }
+    }
+}
+
+.card-text {
+    margin-bottom: $card-text-marginBottom;
+
+    abbr {
+        border: 0;
+        color: inherit;
+        font-size: inherit;
+    }
+}
+
+.card-figcaption-button {
+    border: $card-figcaption-button-border;
+    display: $card-figcaption-button-display;
+    margin: $card-figcaption-button-margin;
+
+    svg {
+        stroke: stencilColor("color-white");    
+    }
+    input {
+        position: absolute;
+        visibility: hidden;
+        height: 100%;
+        width: 100%;
+    }
+
+    &:active {
+        background-color: stencilColor("button--primary-backgroundColor");
+        // border: $card-figcaption-button-border;
+    }
+
+    .card-figcaption-body & {
+        &:focus {
+            background-color: stencilColor("button--primary-backgroundColor");
+            // outline: revert;
+        }
+    }
+
+    + .card-figcaption-button {
+        margin: 0;
+    }
+}
+
+.card-body {
+    text-align: left;
+
+    // @include breakpoint("small") {
+    //     text-align: left;
+    // }
+    .card-text{
+        color: stencilColor("color-textBase");
+        line-height: normal;
+        margin: 0;
+        font-weight: 400;
+        .price-section {
+            .price {
+                font-size: 17px;
+                font-weight: 500;
+                &.price--non-sale, &.price--rrp {
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: #707070;
+                }
+            }
+            &.non-sale-price--withoutTax, &.rrp-price--withTax {
+                margin-left: 8px;
+            }
+            .price-from-label {
+                padding-right: 5px;
+            }
+        }
+        &.card--price {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+
+//
+// Alternate card
+//
+// Purpose: Used to give the card alternative styling
+// -----------------------------------------------------------------------------
+
+.card--alternate {
+    border: 3px solid stencilColor("card--alternate-borderColor");
+    transition: all 0.15s ease;
+
+    .card-body {
+        background-color: stencilColor("card--alternate-backgroundColor");
+        padding: spacing("half");
+        transition: all 0.15s ease;
+
+        @include breakpoint("small") {
+            padding: spacing("single");
+        }
+    }
+
+    &:hover {
+        border-color: stencilColor("color-primary");
+
+        .card-body {
+            background-color: stencilColor("color-primary");
+
+            .card-text {
+                color: stencilColor("card--alternate-color--hover");
+            }
+        }
+
+        .card-title > a {
+            color: stencilColor("card--alternate-color--hover");
+        }
+    }
+}
+.productList .card--item .card-body .card-action .addToCart_button {
+    max-width: 210px;
+}
+.card--item {
+    padding: 16px;
+    border: container("border");
+    position: relative;
+    margin-bottom: 0rem;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 100%;
+    // justify-content: space-between;
+    .card-body {
+        border-top: container("border");
+        margin-top: 0px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .card-detail {
+            column-gap: 15px;
+            margin-bottom: 10px;
+            justify-content: space-between;
+            .card-sku {
+                margin-bottom: 0;
+                color: stencilColor("color-textSecondary");
+                line-height: normal;
+                font-weight: 400;
+            }
+        }
+        .card-action {
+            column-gap: 12px;
+            .form-field {
+                max-width: 100%;
+                margin: 0;
+                width: 100%;
+                // .quantity-box.formDisable {
+                //     cursor: not-allowed;
+                //     .button, .quantity-input {
+                //         cursor: not-allowed;
+                //         pointer-events: none;
+                //     }
+                // }
+                .add-to-cart-form {
+                    column-gap: 0.5rem;
+                }
+            }
+            .addToCart_button {
+                width: 100%;
+                max-width: calc(100% - 126px);
+                .button {
+                    width: 100%;
+                    margin-bottom: 0;
+                    padding: 11px 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    column-gap: 0.3rem;
+                    svg {
+                        // fill: stencilColor("color-white");
+                        stroke: stencilColor("color-white");
+                    }
+                    &:hover, &:focus {
+                        svg {
+                            // fill: stencilColor("color-textBase");
+                            stroke: stencilColor("button--primary-colorHover");
+                        }
+                    }
+                }
+                .button.outofStock_button {
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
+
+.productList {
+    .product {
+        margin-bottom: 1.5rem;
+        .card--item {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: unset;
+            figure.card-figure {
+                width: 25%;
+                max-width: 25%;
+                padding-right: 10px;
+            }
+            .card-body {
+                width: 75%;
+                max-width: 75%;
+                margin: 0;
+                padding: 0 0 0 20px;
+                border: 0;
+                border-left: container("border");
+                .card-summary {
+                    font-weight: 400;
+                    line-height: normal;
+                    margin-bottom: 0.7rem;
+                    overflow: hidden;
+                    display: -webkit-box !important;
+                    -webkit-line-clamp: 2;
+                            line-clamp: 2; 
+                    -webkit-box-orient: vertical;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 1440px) and (min-width: 992px) {
+    .card--item {
+        .card-body {
+            .card-action {
+                // .form-field {
+                //     max-width: 89px;
+                // }
+                .addToCart_button {
+                    max-width: calc(100% - 84px);
+                    .button {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    } 
+}
+@media screen and (max-width: 680px) and (min-width: 551px) {
+    // .card--item .card-body .card-action .form-field {
+    //     width: 100%;
+    //     max-width: calc(100% - 56px);
+    // }
+    .card--item .card-body .card-action .form-field .quantity-box {
+        width: 100%;
+    }
+    .card--item .card-body .card-action .form-field .form-increment {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .form-increment .button {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    .form-input--incrementTotal {
+        width: 1.5rem;
+    }
+    .card--item .card-body .card-action .addToCart_button {
+        width: 100%;
+        max-width: 44px;
+    }
+
+}
+@media screen and (max-width: 1199px) {
+    .card--item {
+        .card-body {
+            .card-detail {
+                flex-wrap: wrap;
+                row-gap: 2px;
+            }
+        }
+    }
+    .category-page {
+        .productGrid {
+            .card--item {
+                .card-body {
+                    .card-action {
+                        .addToCart_button {
+                            .button {
+                                span {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+@media screen and (max-width: 991px) {
+    .card--item {
+        padding: 10px;
+        .card-body {
+            margin-top: 10px;
+            .card-detail {
+                .card-text, .card-sku {
+                    font-size: 14px;
+                }
+            }
+            .price-section {
+                .rangePrice {
+                    flex-wrap: wrap;
+                }
+                .price {
+                    font-size: 16px;
+                }
+            }
+            .card-action {
+                .addToCart_button {
+                    .button {
+                        span {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .card-title {
+        font-size: 15px;
+    }
+
+}
+.productList .card--item .card-body .card-action .addToCart_button .button span {
+    display: block;
+}
+@media screen and (max-width: 575px) {
+    .productList {
+        .product {
+            .card--item {
+                figure.card-figure {
+                    width: 100%;
+                    max-width: 100%;
+                }
+                .card-body {
+                    width: 100%;
+                    max-width: 100%;
+                    padding: 15px 0 0px;
+                    border-left: 0;
+                    margin-top: 16px;
+                    border-top: container("border");
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 450px) {
+    .card--item {
+        .card-body {
+            .card-action {
+                column-gap: 10px;
+                .form-field {
+                    .quantity-box {
+                        max-width: calc(100% - 51px);
+                        width: 100%;
+                    }
+                    width: 100%;
+                    .form-increment {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        .form-input--incrementTotal {
+                            width: 2rem;
+                        }
+                        .button {
+                            padding-left: 5px;
+                            padding-right: 5px;
+                        }
+                    }
+                }
+                .addToCart_button {
+                    width: 44px;
+                    max-width: 44px;
+                    .button {
+                        padding-left: 6px;
+                    }
+                }
+            }
+        }
+    }
+    .productList .card--item .card-body .card-action .addToCart_button .button span {
+        display: none;
+    }
+}

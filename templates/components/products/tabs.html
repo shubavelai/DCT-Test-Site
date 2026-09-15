@@ -1,0 +1,17 @@
+<div class="section-spacing sectionLoad">
+    <div class="container">
+        <div class="related--products">
+            {{#if product.related_products}}
+                <h2>{{lang 'products.related_products'}}</h2>
+                {{> components/products/carousel products=product.related_products columns=4 list="Related Products"}}
+            {{/if}}
+        </div>
+
+        <div class="similar_by_views_products">
+            {{#if product.similar_by_views}}
+                <h2>{{lang 'products.similar_by_views'}}</h2>
+                {{> components/products/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
+            {{/if}}
+        </div>
+    </div>
+</div>

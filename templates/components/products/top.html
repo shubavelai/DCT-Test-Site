@@ -1,0 +1,11 @@
+<div class="section-spacing sectionLoad">
+    <div class="container">
+        <h2 class="page-heading d-flex justify-content-between">
+            {{lang 'products.top' }}
+            <a href="{{theme_settings.top_view_all_link}}" class="category_viewall">{{lang 'common.viewall' }}</a>
+        </h2>
+
+        {{> components/products/top-carousel products=products show_compare=products.show_compare list="top Products"}}
+
+    </div>
+</div>

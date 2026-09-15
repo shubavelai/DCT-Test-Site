@@ -1,0 +1,76 @@
+<section class="{{#unless theme_settings.theme_health}}container{{/unless}} heroCarousel_wrapper sectionLoad">
+    <div class="row pre-row heroCarouselRow {{#if theme_settings.theme_automotive}}justify-content-end{{/if}}">
+        <div class="{{#unless theme_settings.slideshowsidebanner-img }}col-12 {{else}} col-lg-8 {{/unless}} pre-col heroCarouselLeft">
+            <div class="heroCarousel" 
+                data-slick='{
+                    "arrows": {{arrows}},
+                    "mobileFirst": true,
+                    "slidesToShow": 1,
+                    "slidesToScroll": 1,
+                    "autoplay": false,
+                    "autoplaySpeed": {{carousel.swap_frequency}},
+                    "adaptiveHeight": true,
+                    "slide": "[data-hero-slide]"
+                }'>
+                {{#each carousel.slides}}
+                {{#if button_text}}
+                <div data-hero-slide="{{@index}}">
+                {{else}}
+                <a href="{{url}}" data-hero-slide="{{@index}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}">
+                {{/if}}
+                    <div class="heroCarousel-slide {{#if ../theme_settings.homepage_stretch_carousel_images}}stretch{{/if}} {{#if @first}}heroCarousel-slide--first{{/if}}">
+                        {{#if button_text}}
+                        <a href="{{url}}" class="heroCarousel-image-wrapper" aria-label="heroCarousel">
+                        {{else}}
+                        <div class="heroCarousel-image-wrapper">
+                        {{/if}}
+                        {{#if @first}}
+                            {{> components/common/responsive-img
+                                image=stencil_image
+                                class="heroCarousel-image"
+                                fallback_size='1280w'
+                                lazyload='disabled'
+                            }}
+                        {{else}}
+                            {{> components/common/responsive-img
+                                image=stencil_image
+                                class="heroCarousel-image"
+                                fallback_size='1280w'
+                                lazyload='lazyload'
+                            }}
+                        {{/if}}
+                        {{#if button_text}}
+                        </a>
+                        {{else}}
+                        </div>
+                        {{/if}}
+                        {{#or heading text button_text}}
+                            {{> components/carousel-content}}
+                        {{/or}}
+                    </div>
+                {{#if button_text}}
+                </div>
+                {{else}}
+                </a>
+                {{/if}}
+                {{/each}}
+                {{#if carousel.slides.length '>' 1}}
+                    {{> components/carousel-content-announcement}}
+                    {{#if play_pause_button}}
+                        {{> components/carousel-play-pause-button}}
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+        {{#if theme_settings.slideshowsidebanner-img}}
+        <div class="col-12 {{#if theme_settings.theme_automotive}}col-lg-2{{else}}col-lg-4{{/if}} pre-col heroCarouselRight">
+            <div class="slideshow-img-banner">
+                <a href="{{theme_settings.slideshowbanner-img-link}}">
+                    <img class="img-fluid lazyload" id="imageLoader" data-sizes="auto" data-src="/product_images/uploaded_images/{{theme_settings.slideshowbanner-img}}" width="1920px" height="550px" alt="banner"/>
+                    <!-- {{> components/cms/image-loader}} -->
+                </a>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</section>

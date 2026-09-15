@@ -1,0 +1,59 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+    <div class="contact-us-main">
+        <div class="container">
+            <div class="row pre-row">
+                <div class="col-lg-6 col-12 contactpage-detail">
+                    <div class="contactpage-detail-wrapper">
+                        {{#unless theme_settings.hide_contact_us_page_heading }}
+                            <h1 class="page-heading">{{page.title}}</h1>
+                        {{/unless}}
+                        <div class="contact-content">
+                            <p>{{theme_settings.contact_content1}}{{theme_settings.contact_content2}}{{theme_settings.contact_content3}}</p>
+                            <p><a href="tel:{{theme_settings.contactpage_number}}">{{theme_settings.contactpage_number}}</a></p>
+                            
+                            <p><a href="mailto:{{theme_settings.contactpage_email}}">{{theme_settings.contactpage_email}}</a></p>
+
+                            <p>{{theme_settings.contactpage_info}}</p>
+                        </div>
+                        {{#if theme_settings.contact_map_show}}
+                        <div class="map-iframe">
+                            <iframe src="{{theme_settings.map_iframe1}}{{theme_settings.map_iframe2}}{{theme_settings.map_iframe3}}{{theme_settings.map_iframe4}}{{theme_settings.map_iframe5}}{{theme_settings.map_iframe6}}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="locationMap"></iframe>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 contactPage-form">
+
+                    {{#if page.sub_pages}}
+                        <nav class="navBar navBar--sub">
+                            <ul class="navBar-section account-navigation">
+                                {{#each page.sub_pages}}
+                                    <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </nav>
+                    {{/if}}
+
+                    <div id="contact-us-page" class="page-content page-content--centered">
+                        <h1 class="form--title">{{theme_settings.contactpage_form_title}}</h1>
+                        {{#if forms.contact.success}}
+                            <div id="contact-us-success">{{{lang 'forms.contact_us.successful' shopPath=urls.home}}}</div>
+                        {{else}}
+                            {{{page.content}}}
+                            {{> components/page/contact-us-form}}
+                        {{/if}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{/partial}}
+
+{{> layout/base}}

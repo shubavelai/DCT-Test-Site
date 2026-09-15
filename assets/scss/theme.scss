@@ -1,0 +1,863 @@
+// =============================================================================
+// STENCIL
+// =============================================================================
+
+
+// Tools
+// -----------------------------------------------------------------------------
+//
+// 1. Import Citadel's toolkit for use.
+//
+// -----------------------------------------------------------------------------
+
+@import "../../node_modules/@bigcommerce/citadel/dist/tools/toolkit"; // 1
+@import "tools/tools";
+
+// Settings
+// -----------------------------------------------------------------------------
+//
+// 1. Stencil global settings get imported first.
+// 2. Import all Citadel and Foundation settings.
+// 3. Common aria helpers.
+// 4. Import Stencil's component settings overrides.
+// 5. Import tools which set/reset Citadel's global settings, to be consumed by
+//    the rest of Stencil.
+// 6. Import Citadel's version of foundation.
+//      - This enables the ability to "null" variables in the Stencil settings.
+//
+// -----------------------------------------------------------------------------
+
+@import "settings/global/global"; // 1
+
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/global/global"; // 2
+
+@import "settings/global/tools"; // 5
+
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/normalize/normalize"; // 2
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/foundation/foundation"; // 2
+@import "../../node_modules/@bigcommerce/citadel/dist/settings/bigcommerce/bigcommerce"; // 2
+
+@import "../../node_modules/@bigcommerce/citadel/dist/vendor/foundation/foundation"; // 6
+
+@import "settings/normalize/normalize"; // 4
+@import "settings/vendor/vendor"; // 4
+@import "settings/foundation/foundation"; // 4
+@import "settings/citadel/citadel"; // 4
+@import "settings/stencil/stencil"; // 4
+@import "settings/layouts/layouts"; // 4
+
+
+// Utilities
+// -----------------------------------------------------------------------------
+
+@import "utilities/utilities";
+@import "../../node_modules/@bigcommerce/citadel/dist/utilities/utilities";
+
+
+// Components
+// -----------------------------------------------------------------------------
+//
+// 1. Import Citadel's normalize dependency.
+// 2. Import Citadel's components.
+// 2. Import Stencil's component additions and custom components.
+//
+// -----------------------------------------------------------------------------
+
+@import "../../node_modules/@bigcommerce/citadel/dist/vendor/normalize/normalize"; // 1
+@import "../../node_modules/@bigcommerce/citadel/dist/components/components"; // 2
+@import "common/index"; // 3
+@import "components/components"; // 6
+
+
+// Layouts
+// -----------------------------------------------------------------------------
+//
+// 1. Stencil design layout files (example: Header or Footer).
+//
+// -----------------------------------------------------------------------------
+
+@import "layouts/layouts"; // 1
+
+.productView-sticky {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease;
+
+    &.sticky {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.quick-add-cart-main {
+    max-width: 85.71429rem;
+    margin: 0 auto;
+    position: relative;
+
+    #responseMessage {
+        background: rgba(51, 51, 51, 0.7);
+        color: #FFF;
+        position: absolute;
+        top: calc(100% + 5px);
+        padding: 10px;
+        width: 100%;
+        display: none;
+    }
+}
+
+.quick-add-form {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    .form-groups {
+        display: flex;
+        align-items: center;
+
+        .form-group {
+            input {
+                border-right: 0;
+                border-radius: 0;
+                height: 35px;
+                outline: none !important;
+                padding: 0px 13px;
+
+                &#quantity {
+                    max-width: 48px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .button {
+        position: relative;
+        transition: all .3s ease;
+        margin: 0;
+        border-radius: 0;
+        padding: 5.5px 20px;
+        svg {
+            stroke: stencilColor("button--primary-color");
+        }
+        &:hover {
+            svg {
+                stroke: stencilColor("button--primary-colorHover");
+            }
+        }
+    }
+}
+/* ==== Custom Navigation Menu CSS ==== */
+#menu-shopall .navPage-subMenu-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+#menu-shopall .navPage-subMenu-item-child {
+    flex: 0 0 auto;
+    width: calc(20% - 16px);
+}
+
+#menu-shopall .navPage-subMenu-item-child a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#menu-shopall .navPage-subMenu-item-child img {
+    display: block;
+    width: 100%;
+    max-width: 140px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+.top-bar{
+    background-color: #F0F2F4;
+}
+.top-bar .topbar-contact .contact-detail-inner a {
+    color: #555;
+}
+.top-bar .topBarPromotion-carousel .top-bar-f a {
+    color: #555;
+}
+.top-bar .topbar-contact .contact-detail-inner a svg {
+    stroke: #555;
+}
+.header.header-top.fixed{
+    position: relative!important;
+}
+@media (max-width: 800px) {
+    .header-logo--left img.header-logo-image-unknown-size {
+        max-width: 300px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+}
+.wr-menu {
+    padding: 9px;
+}
+@media screen and (min-width: 1440px) {
+    .navPages-action {
+        padding: 9px 12px;
+    }
+}
+.topbar-social-icon a {
+    padding: 0px 10px;
+    color: #555;
+}
+#search .wb-search-btn:hover {
+ border: 1px solid #17518f;
+}
+.button--primary:hover {
+    background-color: #fff;
+    border: 1px solid #17518f;
+    color: #17518f;
+}
+.footer-top {
+    padding: 10px 0;
+}
+.footer-top .footer-top-wrap p:nth-of-type(1) {
+    opacity: 0.5;
+}
+.footer-top .footer-top-wrap p:nth-child(2) {
+    opacity: 1;
+}
+.view_all.catalog a{
+    background: #17518f;
+    border: 1px solid #17518f;
+    color: #fff;
+    border-radius: 50px;
+}
+.view_all.catalog a:hover{
+    background: #fff;
+    border: 1px solid #17518f;
+    color: #17518f;
+    border-radius: 50px;
+}
+@media (min-width: 801px) {
+    .catalog-des-wrapper {
+        display: block !important;
+    }
+}
+@media (max-width: 801px) {
+.download-catalog-heading{
+    padding-bottom: 1rem;
+}
+}
+.dct-cat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #ffffff !important;
+    border: 1px solid #d5d9d9 !important;
+    padding: 20px 15px !important;
+}
+
+.dct-cat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+.dct-cat-card a {
+    text-decoration: none !important;
+    color: #0f1111 !important;
+}
+/* 1:1 Aspect Ratio Images */
+.dct-grid-img {
+    aspect-ratio: 186 / 116;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    background-color: #f8f9fa;
+}
+.dct-grid-wrapper {
+    background-color: #eaeded !important;
+    padding: 20px 10px !important;
+    overflow: hidden !important;
+}
+.dct-grid-wrapper .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.dct-grid-wrapper .card{
+    margin-bottom: 0px;
+}
+.dct-grid-wrapper h3{
+    margin-top: 0px;
+}
+.dct-cat-card .row.no-gutters {
+    margin-left: -6px !important;
+    margin-right: -6px !important;
+}
+.dct-cat-card .col-6 {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    padding-bottom: 12px !important; 
+    text-align: left !important;
+}
+
+.productView-description .accordion input:checked ~ .accordion__content{
+    max-height: unset !important;
+}
+//product swatch design
+/*.productView-options [data-product-attribute="swatch"] {
+    //flex-wrap: wrap; 
+    //gap: 8px;
+  //  max-width: 100%;
+
+    .form-option-wrapper {
+        display: inline-flex;
+        margin: 0;
+    }
+    
+    .swatch-hidden {
+        display: none !important;
+    }
+    
+    
+    .swatch-more-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #333;
+        color: #fff;
+        font-weight: 600;
+        font-size: 13px;
+        border-radius: 4px;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: #555;
+        }
+    }
+}*/
+
+.productView-options [data-product-attribute="swatch"] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    overflow: visible;
+    
+    @media (min-width: 768px) {
+        max-width: 470px;
+    }
+    
+    @media (max-width: 767px) {
+        max-width: 100%;
+    }
+
+    .form-label, 
+    .form-field-title {
+        width: 100%; 
+        margin-bottom: 8px; 
+    }
+
+    .form-option-wrapper {
+        display: inline-flex;
+        flex: 0 0 auto;
+        width: 38px;
+        height: 38.5px;
+        margin: 0;
+
+        .form-option {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .swatch-hidden {
+        display: none;
+    }
+
+    .swatch-more-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #333;
+        color: #fff;
+        font-weight: 600;
+        font-size: 13px;
+        width: 38px;
+        height: 38.5px;
+        cursor: pointer;
+        margin: 0;
+        flex: 0 0 auto;
+
+        &:hover {
+            background: #555;
+        }
+    }
+}
+//Product price Section
+.custom-price-section{
+    background: #FAF4EE;
+    border: 1px solid #ecc8d6;
+    border-radius: 10px;
+    padding: 1rem 0;
+    max-width: 470px;
+}
+
+.productView-details-description{
+    margin-bottom: 0.5rem;
+    color: #757575;
+}
+.productView-details-description .productView-info-value{
+    padding-left: 0.2rem;
+}
+
+//Project showcase
+ul.boxwrap.show_case_product {
+    list-style: none;
+    margin-left: 0;
+    width: 100%;
+    display: inline-table;
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+ul.boxwrap.show_case_product li.box {
+    background: #fff !important;
+    padding-left: 0 !important;
+    max-width: 345px;
+    width: auto !important;
+    margin: 5px;
+    display: inline-block;
+    box-shadow: 0 8px 8px #ccc !important;
+    background-position: left 7px;
+    padding-left: 20px;
+    line-height: 26px;
+    background-size: 12px;
+}
+
+//Product-view sticky
+.productView-sticky.sticky{
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+body:has(.productView-sticky.sticky[style*="opacity: 0"]),
+body:has(.productView-sticky.sticky:not(.is-visible)) {
+    footer.footer {
+        padding-bottom: unset !important;
+    }
+}
+.productView-brand a {
+    color: #17518f;
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 12px;
+}
+.form-label--inlineSmall small{
+    margin-left: 0px !important;
+}
+.require-astric{
+    color: red;
+}
+
+.accordions {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.accordions input[type="checkbox"] {
+    display: none;
+}
+
+.accordions .accordion {
+    display: flex;
+    flex-direction: column;
+}
+
+.accordions .accordion__header {
+    display: inline-block;
+    padding: 12px 20px;
+    font-weight: 600;
+    color: #333;
+    background: #f8f8f8;
+    border: 1px solid #e1e1e1;
+    border-bottom: none;
+    cursor: pointer;
+    margin-right: 4px;
+    border-radius: 4px 4px 0 0;
+}
+
+.accordions input[type="checkbox"]:checked + .accordion__header {
+    background: #fff;
+    color: #111;
+    border-bottom: 2px solid #fff; /* blends with content box */
+}
+
+.accordions .accordion__content {
+    display: none;
+    width: 100%;
+    order: 99; 
+    padding: 20px 0;
+    border-top: 1px solid #e1e1e1;
+}
+
+.accordions input[type="checkbox"]:checked ~ .accordion__content {
+    display: block;
+}
+
+.accordions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    position: relative !important;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+/* 2. Hide checkboxes */
+.accordions input[type="checkbox"] {
+    display: none !important;
+}
+
+/* 3. Make each accordion item sit side-by-side horizontally */
+.accordions .accordion {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* 4. Tab Header styling */
+.accordions .accordion__header {
+    display: block !important;
+    padding: 12px 20px !important;
+    font-weight: 600;
+    color: #333;
+    background: #f8f8f8 !important;
+    border: 1px solid #e1e1e1 !important;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    white-space: nowrap;
+}
+
+/* Active tab style */
+.accordions input[type="checkbox"]:checked + .accordion__header {
+    background: #fff !important;
+    border-bottom: 2px solid #fff !important;
+    color: #111;
+}
+
+/* 5. Content panel - forced to drop to the next full-width row */
+.accordions .accordion__content {
+    display: none !important;
+    width: 100% !important;
+    order: 999 !important;
+    flex-basis: 100% !important;
+    padding: 20px 0 !important;
+    border-top: 1px solid #e1e1e1;
+    margin-top: 1px;
+}
+
+/* Show content when active */
+.accordions input[type="checkbox"]:checked ~ .accordion__content {
+    display: block !important;
+}
+
+.price-section, .productView-price {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.price.price--non-sale, 
+.price.non-sale-price, 
+[data-product-price-old],
+.price-section.non-sale-price--withoutTax {
+    order: 2 !important;
+}
+
+.price.price--withoutTax, 
+.price--main, 
+[data-product-price-without-tax],
+.price-section.price--withoutTax {
+    order: 1 !important;
+    font-size: 27px;
+    color: #813b26;
+    font-weight: 400;
+}
+.productView-price .price-section--saving{
+     order: 3 !important;
+}
+
+span.price.price--saving{
+    background: #bc3228;
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 4px;
+}
+.productView-price .price-section--saving{
+    font-size: 12px !important;
+    font-weight: 100;
+}
+@media (min-width: 801px) {
+    .productView-images{
+        order: 1;
+    }
+    .product-description{
+        order: 2;
+    }
+    //.custom-product-action-buttons{
+      //  order: 3;
+       // padding-left: 3rem;
+    //}
+    
+}
+@media (max-width: 801px) {
+    .productView-images{
+        order: 1;
+    }
+    .product-description{
+        order: 3;
+    }
+    //.custom-product-action-buttons{
+       // order: 2;
+    //}
+}
+.button.ar-button{
+    background: #985a42;
+    color: #fff;
+    border: #985a42;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0.85714rem 1.28571rem;
+}
+.button.calculator-button{
+    border-color: #985a42;
+    color: #985a42;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 5px;
+    padding: 0.85714rem 1.28571rem;
+}
+
+
+/* ==========================================================================
+   Inline Layout: Quantity + Equal Width Add to Cart & Wish List
+   ========================================================================== */
+
+/* Outer Row Container holding both forms */
+.action-row-container {
+    display: grid !important;
+    grid-template-columns: min-content 1fr 1fr !important; /* Quantity auto-fit | Equal Button 1 | Equal Button 2 */
+    align-items: end !important;                            /* Bottom baseline alignment */
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    clear: both !important;
+}
+
+/* 1. Un-restrict Cart Form so buttons share equal grid tracks */
+.action-row-container > form[data-cart-item-add] {
+    display: contents !important;                           /* Unwraps Form 1 so items fill grid tracks directly */
+}
+
+/* Product Options full-width row inside Form 1 */
+.action-row-container .product-variants {
+    grid-column: 1 / -1 !important;                         /* Spans full width above action row */
+    width: 100% !important;
+}
+
+/* Stock field full width if present */
+.action-row-container .form-field--stock {
+    grid-column: 1 / -1 !important;
+}
+
+/* 2. Unwrap #add-to-cart-wrapper component */
+.action-row-container #add-to-cart-wrapper {
+    display: contents !important;
+}
+
+/* Column 1: Quantity Field */
+.action-row-container .form-field--increments {
+    grid-column: 1 !important;
+    margin: 0 !important;
+    width: min-content !important;
+    white-space: nowrap !important;
+}
+
+/* Column 2: Add to Cart Button Container (Exact 1fr) */
+.action-row-container .add-to-cart-buttons {
+    grid-column: 2 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+/* Column 3: Wish List Form Container (Exact 1fr) */
+.action-row-container .form-wishlist {
+    grid-column: 3 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+/* ==========================================================================
+   Button Specific Styling (Identical 1:1 Equal Width & Height)
+   ========================================================================== */
+#form-action-addToCart,
+.action-row-container .wishlist-button {
+    width: 100% !important;
+    height: 46px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    box-sizing: border-box !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    vertical-align: bottom !important;
+}
+
+/* Wish List Inner Text Formatting */
+.action-row-container .wishlist-button span {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+/* Wish List Arrow Icon Alignment */
+.action-row-container .wishlist-button .icon {
+    margin-left: 6px !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+/* Wishlist Dropdown Popup Layering */
+.action-row-container .dropdown-menu {
+    z-index: 99 !important;
+}
+
+/* ==========================================================================
+   TARGETED FIX FOR: iPhone SE, iPad Mini, iPad Air (Screen Widths <= 991px)
+   ========================================================================== */
+/* ==========================================================================
+   STRICT MOBILE & TABLET FIX (Quantity Top | Buttons Side-by-Side 50/50)
+   ========================================================================== */
+@media screen and (max-width: 991px) {
+    /* 1. Main Container Flex Wrap */
+    .action-row-container {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    /* 2. Cart Form Container Flex (Prevents form from taking separate line) */
+    .action-row-container > form[data-cart-item-add] {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        margin: 0 !important;
+    }
+
+    /* 3. Inner Add to Cart Wrapper */
+    .action-row-container #add-to-cart-wrapper {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* 4. Quantity Box (Takes Full Width on Top Row) */
+    .action-row-container .form-field--increments {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* 5. Add to Cart Button (Left 50% Share) */
+    .action-row-container .add-to-cart-buttons {
+        width: calc(50% - 5px) !important;
+        flex: 1 1 calc(50% - 5px) !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 6. Wish List Form (Right 50% Share - Placed Side-by-Side) */
+    .action-row-container .form-wishlist {
+        width: calc(50% - 5px) !important;
+        flex: 1 1 calc(50% - 5px) !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 7. Button Height & Styling Fix */
+    #form-action-addToCart,
+    .action-row-container .wishlist-button {
+        width: 100% !important;
+        height: 44px !important;
+        margin: 0 !important;
+        padding: 0 4px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+    }
+
+    .action-row-container .wishlist-button span {
+        font-size: 13px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+}
+
+.custom-product-action-buttons {
+  order:3; 
+  display: flex;
+  width: 100%;
+  max-width: 813px; /* Prevents the container from stretching too wide */
+  text-align: center;
+}
+
+/* Optional responsive mobile stacking */
+@media (max-width: 480px) {
+  .custom-product-action-buttons {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .custom-product-action-buttons .button {
+    width: 100%; /* Makes buttons full-width on mobile phones */
+  }
+}
+.add-to-cart-wallet-buttons.wallet{
+    margin-top:0px !important;
+}
